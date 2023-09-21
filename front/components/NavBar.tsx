@@ -18,7 +18,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
         }
         return { width: "0px", offset: "0px" };
     }
-    
+
     const computeActiveIndex = () => {
         let activeIndex = 0;
         links.forEach((link, index) => {
@@ -36,7 +36,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
     const handleMouseLeave = () => {
         setUnderlineStyle(computeUnderlineStyle(activeIndex));
     };
-    
+
     useEffect(() => {
         const activeIndex = computeActiveIndex();
         setActiveIndex(activeIndex);
@@ -44,32 +44,33 @@ export default function NavBar({ links }: { links: { href: string, title: string
     }, [pathname]);
 
     return (
-        <ul className="flex p-4 gap-4 justify-center relative" onMouseLeave={handleMouseLeave}
-        >
-            {links && links.map((link, index) =>
-                <li
-                    key={index}
-                    className="nav-item relative"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                >
-                    <Link
-                        className={`nav-link text-lg text-secondary hover:text-accent transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : ""}`}
-                        href={{ pathname: link.href }}
+        <nav className="flex justify-center bg-black bg-opacity-20 w-full backdrop-blur-xl shadow-xl">
+            <ul className="flex p-4 gap-4 justify-center relative" onMouseLeave={handleMouseLeave}
+            >
+                {links && links.map((link, index) =>
+                    <li
+                        key={index}
+                        className="nav-item relative"
+                        onMouseEnter={() => handleMouseEnter(index)}
                     >
-                        {link.title}
-                    </Link>
-                </li>
-            )}
-            <div
-                className="underline absolute bottom-4 left-0"
-                style={{
-                    width: underlineStyle.width,
-                    height: "2px",
-                    backgroundColor: "rgb(var(--accent-rgb))",
-                    transition: "all 0.3s ease-in-out",
-                    transform: `translateX(${underlineStyle.offset})`,
-                }}
-            />
-        </ul>
-    );
+                        <Link
+                            className={`nav-link text-lg hover:text-accent transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-secondary"}`}
+                            href={{ pathname: link.href }}
+                        >
+                            {link.title}
+                        </Link>
+                    </li>
+                )}
+                <div
+                    className="underline absolute bottom-4 left-0"
+                    style={{
+                        width: underlineStyle.width,
+                        height: "2px",
+                        backgroundColor: "rgb(var(--accent-rgb))",
+                        transition: "all 0.3s ease-in-out",
+                        transform: `translateX(${underlineStyle.offset})`,
+                    }}
+                />
+            </ul>
+        </nav>);
 }
