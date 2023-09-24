@@ -1,10 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function NavBar({ links }: { links: { href: string, title: string }[] }) {
     const pathname = usePathname();
     const [underlineStyle, setUnderlineStyle] = useState({ width: "0px", offset: "0px" });
+    console.log(underlineStyle);
     const [activeIndex, setActiveIndex] = useState(0);
 
 
@@ -44,8 +46,9 @@ export default function NavBar({ links }: { links: { href: string, title: string
     }, [pathname]);
 
     return (
-        <nav className="flex justify-center bg-black bg-opacity-20 w-full backdrop-blur-xl shadow-xl">
-            <ul className="flex p-4 gap-4 justify-center relative" onMouseLeave={handleMouseLeave}
+        <nav className="w-full shadow-lg shadow-primary">
+            <Link className="absolute m-2    z-10" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
+            <ul className="left-1/2 -translate-x-1/2 flex p-4 gap-4 justify-center relative" onMouseLeave={handleMouseLeave}
             >
                 {links && links.map((link, index) =>
                     <li
@@ -54,23 +57,25 @@ export default function NavBar({ links }: { links: { href: string, title: string
                         onMouseEnter={() => handleMouseEnter(index)}
                     >
                         <Link
-                            className={`nav-link text-lg hover:text-accent transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-secondary"}`}
+                            className={`nav-link text-xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-secondary"}`}
                             href={{ pathname: link.href }}
                         >
                             {link.title}
                         </Link>
                     </li>
                 )}
-                <div
-                    className="underline absolute bottom-4 left-0"
-                    style={{
-                        width: underlineStyle.width,
-                        height: "2px",
-                        backgroundColor: "rgb(var(--accent-rgb))",
-                        transition: "all 0.3s ease-in-out",
-                        transform: `translateX(${underlineStyle.offset})`,
-                    }}
-                />
+                {underlineStyle.width !== "0px" && pathname !== "/" &&
+                    <div
+                        className="underline absolute bottom-2 left-0"
+                        style={{
+                            width: underlineStyle.width,
+                            height: "2px",
+                            backgroundColor: "rgb(var(--accent-rgb))",
+                            transition: "all 0.3s ease-in-out",
+                            transform: `translateX(${underlineStyle.offset})`,
+                        }}
+                    />
+                }
             </ul>
         </nav>);
 }
