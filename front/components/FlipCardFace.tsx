@@ -6,34 +6,43 @@ export default function Face({ children, reverse, flipped }: { children: ReactNo
     let originalHeight = useRef(0);
     let totalHeight = useRef(0);
     const faceRef = useRef(null);
-    const isOverflowActive = (element: HTMLElement) => {
-        const targetElement: HTMLElement|null = element.querySelector(".face-content");
-        if (targetElement) {
-            originalHeight.current = targetElement.offsetHeight;
-            totalHeight.current = targetElement.scrollHeight;
-            return targetElement.offsetHeight < targetElement.scrollHeight;
+    const isOverflowActive = (element: HTMLElement | null) => {
+        if (!element) {
+            return false;
         }
-        return false;
+        const targetElement: HTMLElement | null = element.querySelector(".face-content");
+        if (!targetElement) {
+            return false;
+
+        }
+        originalHeight.current = targetElement.offsetHeight;
+        totalHeight.current = targetElement.scrollHeight;
+        return targetElement.offsetHeight < targetElement.scrollHeight;
     };
     useEffect(() => {
-        if (faceRef.current !== null && isOverflowActive(faceRef.current)) {
+        if (faceRef.current && isOverflowActive(faceRef.current)) {
             setOverflow(true);
-            return;
+        } else {
+            setOverflow(false);
         }
-        setOverflow(false);
-    }, []);
+        const listener = () => setOverflow(isOverflowActive(faceRef.current));
+        window.addEventListener("resize", listener);
+        return () => window.removeEventListener("resize", listener);
+    }, [overflow]);
 
-    const togglerHandler = (e: React.MouseEvent<HTMLElement>) => {
-        e.stopPropagation();
-        if (faceRef.current === null) {
+    const togglerHandler = (e: React.MouseEvent<HTMLElement> | null) => {
+        if (e) {
+            e.stopPropagation();
+        }
+        if (!faceRef.current) {
             return;
         }
         const element: HTMLElement = faceRef.current;
-        const targetElement: HTMLElement|null = element.closest(".flip-card");
+        const targetElement: HTMLElement | null = element.closest(".flip-card");
         if (!targetElement) {
             return;
         }
-        let targetHeight = toggled ? originalHeight.current : totalHeight.current + 24;
+        let targetHeight = toggled ? originalHeight.current : totalHeight.current + 32;
         targetElement.style.minHeight = targetHeight + "px";
         setToggled(!toggled);
     };
@@ -45,7 +54,7 @@ export default function Face({ children, reverse, flipped }: { children: ReactNo
             transform: `rotateY(${flipped ? "180deg" : "0deg"})`,
             backfaceVisibility: "hidden",
         }}>
-            {children}
-            {overflow && <a onClick={togglerHandler} className={`z-10 bg-background text-foreground p-2 rounded absolute bottom-2 left-1/2 -translate-x-1/2`}>{toggled ? "Moins" : "Plus"}</a>}
-        </div>);
+        {children}
+        {overflow && <a onClick={togglerHandler} className={`z-10 bg-background text-foreground p-2 rounded absolute bottom-2 left-1/2 -translate-x-1/2`}>{toggled ? "Moins" : "Plus"}</a>}
+    </div>);
 }
