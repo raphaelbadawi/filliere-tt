@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: 'Page du club de tennis de table de Groisy',
 }
 
-/** @todo: add home icon ; finish cards ; setup appwrite for blog section ; use prefers-color-scheme colors for the blog section */
+/** @todo: dark mode switch ; setup appwrite for home content and blog section ; use prefers-color-scheme colors for the blog section */
 export default function RootLayout({
   children,
 }: {

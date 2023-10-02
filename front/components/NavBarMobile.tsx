@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -22,7 +23,8 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
 
     return (
         <nav className="absolute left-0">
-            <button className="nav-burger fixed z-20 left-6 top-6 p-2 rounded-md" onClick={() => setOpen(!open)}>
+            <Link className="absolute m-2 z-20" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
+            <button className="nav-burger fixed z-20 left-16 top-6 p-2 rounded-md" onClick={() => setOpen(!open)}>
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[0]} />
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[1]} />
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[2]} />

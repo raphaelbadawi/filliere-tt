@@ -13,7 +13,7 @@ export default function TopBar({ links }: { links: { href: string, title: string
         )
     } else if (isDesktop) {
         return (
-            <nav className="absolute flex justify-center w-full">
+            <nav className="bg-backlight absolute flex justify-center w-full">
                 <NavBar links={links} />
             </nav>
         )

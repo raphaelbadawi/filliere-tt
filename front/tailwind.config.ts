@@ -13,6 +13,7 @@ const config: Config = {
         accent: 'rgb(var(--accent-rgb))',
         foreground: 'rgb(var(--foreground-rgb))',
         background: 'rgb(var(--background-rgb))',
+        backlight: 'rgb(var(--background-light-rgb))',
       },
     },
   },

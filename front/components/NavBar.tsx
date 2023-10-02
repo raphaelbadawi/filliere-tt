@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 export default function NavBar({ links }: { links: { href: string, title: string }[] }) {
     const pathname = usePathname();
     const [underlineStyle, setUnderlineStyle] = useState({ width: "0px", offset: "0px" });
-    console.log(underlineStyle);
     const [activeIndex, setActiveIndex] = useState(0);
 
 
@@ -22,7 +21,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
     }
 
     const computeActiveIndex = () => {
-        let activeIndex = 0;
+        let activeIndex = -1;
         links.forEach((link, index) => {
             if (link.href == pathname) {
                 activeIndex = index;
@@ -42,12 +41,13 @@ export default function NavBar({ links }: { links: { href: string, title: string
     useEffect(() => {
         const activeIndex = computeActiveIndex();
         setActiveIndex(activeIndex);
-        setUnderlineStyle(computeUnderlineStyle(activeIndex));
+        const underlineStyle = computeUnderlineStyle(activeIndex);
+        setUnderlineStyle(underlineStyle);
     }, [pathname]);
 
     return (
         <nav className="w-full shadow-lg shadow-primary">
-            <Link className="absolute m-2    z-10" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
+            <Link className="absolute m-2 z-10" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
             <ul className="left-1/2 -translate-x-1/2 flex p-4 gap-4 justify-center relative" onMouseLeave={handleMouseLeave}
             >
                 {links && links.map((link, index) =>
@@ -64,7 +64,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
                         </Link>
                     </li>
                 )}
-                {underlineStyle.width !== "0px" && pathname !== "/" &&
+                {underlineStyle.width !== "0px" &&
                     <div
                         className="underline absolute bottom-2 left-0"
                         style={{
