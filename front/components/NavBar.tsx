@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-export default function NavBar({ links }: { links: { href: string, title: string }[] }) {
+export default function NavBar({ links }: { links: { href: string, title: string, icon: ReactNode }[] }) {
     const pathname = usePathname();
     const [underlineStyle, setUnderlineStyle] = useState({ width: "0px", offset: "0px" });
     const [activeIndex, setActiveIndex] = useState(0);
@@ -57,9 +57,10 @@ export default function NavBar({ links }: { links: { href: string, title: string
                         onMouseEnter={() => handleMouseEnter(index)}
                     >
                         <Link
-                            className={`nav-link text-xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-secondary"}`}
+                            className={`flex items-center gap-1 nav-link text-xl font-semibold transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-secondary"}`}
                             href={{ pathname: link.href }}
                         >
+                            <span className="icon">{link.icon}</span>
                             {link.title}
                         </Link>
                     </li>
