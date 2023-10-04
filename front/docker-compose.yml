@@ -2,6 +2,6 @@ version: '3'
 services:
   filliere-tt:
     build:
-      context: ./front
+      context: .
     ports:
       - "3000:3000"

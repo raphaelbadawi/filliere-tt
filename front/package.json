@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "dev:up": "docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml up",
-    "prod:up": "docker-compose -f ../docker-compose.yml -f ../docker-compose.prod.yml up",
+    "dev:up": "docker-compose --env-file .env.development.local --env-file ../back/.env.development.local -f docker-compose.yml -f docker-compose.dev.yml -f ../back/docker-compose.yml up",
+    "prod:up": "docker-compose --env-file .env.production.local --env-file ../back/.env.production.local -f docker-compose.yml -f docker-compose.prod.yml -f ../back/docker-compose.yml up",
     "start": "next start",
     "lint": "next lint"
   },

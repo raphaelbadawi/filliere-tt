@@ -3,6 +3,6 @@ services:
   filliere-tt:
       command: dev
       volumes:
-          - ./front:/usr/src/app
+          - .:/usr/src/app
           - /usr/src/app/node_modules
           - /usr/src/app/.next

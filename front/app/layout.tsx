@@ -9,6 +9,9 @@ const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const poppinsSemiBold = Poppins({ weight: "600", subsets: ["latin"] });
 
 
+console.log("MIAOU");
+console.log(process.env.BACK_HTTP_URL);
+
 const navLinks: { href: string, title: string, icon: ReactNode }[] = [
   { href: "/news", title: "Actualités du club", icon: <FaNewspaper /> },
   { href: "/practical", title: "Informations pratiques", icon: <FaLightbulb /> },
