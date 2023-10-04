@@ -1,5 +1,5 @@
-.nav-item:hover .icon {
-  color: rgb(var(--accent-rgb));
+.nav-item:hover .icon, .icon:hover {
+  color: rgb(var(--accent-rgb)) !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;

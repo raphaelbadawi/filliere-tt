@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
+import DarkModeSwitch from "./DarkModeSwitch";
 
 export default function NavBarMobile({ links }: { links: { href: string, title: string, icon: ReactNode }[] }) {
     const pathname = usePathname();
@@ -29,7 +30,7 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[1]} />
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[2]} />
             </button>
-            <ul className={`fixed z-10 pt-24 flex flex-col justify-start p-4 gap-4 rounded-xl bg-background shadow-xl shadow-primary ${open ? "translate-x-0" : "-translate-x-full"} transition-all duration-300`}>
+            <ul className={`fixed z-10 pt-24 flex flex-col justify-start p-4 gap-4 rounded-br-xl rounded- bg-background shadow-xl shadow-primary ${open ? "translate-x-0" : "-translate-x-full"} transition-all duration-300`}>
                 {links && links.map((link, index) =>
                     <li
                         key={index}
@@ -45,5 +46,6 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
                     </li>
                 )}
             </ul>
-        </nav>);
+            <span className="fixed right-2 z-20 top-6"><DarkModeSwitch  /></span>
+        </nav>)
 }

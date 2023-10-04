@@ -5,13 +5,13 @@ import useMediaQuery from "@/utils/useMediaQuery";
 import NavBar from "./NavBar";
 import NavBarMobile from "./NavBarMobile";
 import { ReactNode } from "react";
+import Spinner from "./Spinner";
 
 export default function TopBar({ links }: { links: { href: string, title: string, icon: ReactNode }[] }) {
     const isDesktop = useMediaQuery('(min-width: 960px)');
-
     if (isDesktop === null) {
         return (
-            <div className="absolute">Chargement en cours</div>
+            <Spinner />
         )
     } else if (isDesktop) {
         return (

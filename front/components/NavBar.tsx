@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import DarkModeSwitch from "./DarkModeSwitch";
 
 export default function NavBar({ links }: { links: { href: string, title: string, icon: ReactNode }[] }) {
     const pathname = usePathname();
@@ -46,9 +47,9 @@ export default function NavBar({ links }: { links: { href: string, title: string
     }, [pathname]);
 
     return (
-        <nav className="w-full shadow-lg shadow-primary">
+        <nav className="relative w-full shadow-lg shadow-primary">
             <Link className="absolute m-2 z-10" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
-            <ul className="left-1/2 -translate-x-1/2 flex p-4 gap-4 justify-center relative" onMouseLeave={handleMouseLeave}
+            <ul className="relative left-1/2 -translate-x-1/2 flex p-4 gap-4 justify-center" onMouseLeave={handleMouseLeave}
             >
                 {links && links.map((link, index) =>
                     <li
@@ -78,5 +79,6 @@ export default function NavBar({ links }: { links: { href: string, title: string
                     />
                 }
             </ul>
+            <span className="absolute top-2 right-2"><DarkModeSwitch  /></span>
         </nav>);
 }
