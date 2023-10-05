@@ -8,10 +8,6 @@ import { ReactNode } from 'react';
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const poppinsSemiBold = Poppins({ weight: "600", subsets: ["latin"] });
 
-
-console.log("MIAOU");
-console.log(process.env.BACK_HTTP_URL);
-
 const navLinks: { href: string, title: string, icon: ReactNode }[] = [
   { href: "/news", title: "Actualités du club", icon: <FaNewspaper /> },
   { href: "/practical", title: "Informations pratiques", icon: <FaLightbulb /> },
@@ -25,7 +21,7 @@ export const metadata: Metadata = {
   description: 'Page du club de tennis de table de Groisy',
 }
 
-/** @todo setup appwrite for home content and blog section ; set pagination */
+/** @todo title and section tag ; replace isDesktop my md queries to hide components ; fix dark mode flash by creating a beforeInteractive.tsx in utils (https://nextjs.org/docs/pages/api-reference/components/script) and just using setDark in the useEffect ; use straou for home content and blog section ; set pagination ; export strapi schemas */
 export default function RootLayout({
   children,
 }: {

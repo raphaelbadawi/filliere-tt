@@ -1,0 +1,11 @@
+version: "3"
+services:
+  filliere-tt:
+    command: prod
+  filliere-tt-strapi:
+    command: start
+    env_file:
+      - ./back/.env.production.local
+  filliere-tt-strapi-db:
+    env_file:
+      - ./back/.env.production.local
