@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { FaMoon, FaSun } from "react-icons/fa6";
 
@@ -10,12 +10,12 @@ export default function DarkModeSwitch() {
         if (isDark) {
             document.documentElement.classList.add('dark');
             localStorage.setItem('color-theme', 'dark');
-            setDark(true);
-            return;
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
         }
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('color-theme', 'light');
-        setDark(false);
+        setDark(isDark);
+        document.documentElement.classList.remove("opacity-0");
     }
 
     useEffect(() => {

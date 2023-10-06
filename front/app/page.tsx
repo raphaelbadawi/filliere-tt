@@ -1,4 +1,5 @@
 import FlipCard from "@/components/FlipCard";
+import Title from "@/components/Title";
 
 const contents = [
   {
@@ -17,10 +18,14 @@ const contents = [
 
 export default function Home() {
   return (
-    <div className="px-4 w-full flex flex-wrap gap-4 mt-6 items-start">
-      <FlipCard width="24rem" height="36rem" title={contents[0].title} caption={contents[0].caption} text={contents[0].text} image={contents[0].image}></FlipCard>
-      <FlipCard width="24rem" height="36rem" title={contents[0].title} caption={contents[0].caption} text={contents[0].text} image={contents[0].image}></FlipCard>
-      <FlipCard width="24rem" height="36rem" title={contents[0].title} caption={contents[0].caption} text={contents[0].text} image={contents[0].image}></FlipCard>
-    </div>
+    <section id="home" className="w-full">
+      <Title text="Bienvenue sur le site du club de tennis de table de Groisy" />
+      <div className="px-4 flex flex-wrap gap-4 items-start">
+        <FlipCard width="24rem" height="36rem" title={contents[0].title} caption={contents[0].caption} text={contents[0].text} image={contents[0].image}></FlipCard>
+        <FlipCard width="24rem" height="36rem" title={contents[0].title} caption={contents[0].caption} text={contents[0].text} image={contents[0].image}></FlipCard>
+        <FlipCard width="24rem" height="36rem" title={contents[0].title} caption={contents[0].caption} text={contents[0].text} image={contents[0].image}></FlipCard>
+      </div>
+    </section>
+
   )
 }

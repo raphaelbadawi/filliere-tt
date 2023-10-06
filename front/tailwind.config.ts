@@ -16,6 +16,9 @@ const config: Config = {
         background: 'rgb(var(--background-rgb))',
         backlight: 'rgb(var(--background-light-rgb))',
       },
+      maxWidth: {
+        '1/2': '50%',
+      },
     },
   },
   plugins: [],

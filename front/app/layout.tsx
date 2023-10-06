@@ -21,17 +21,18 @@ export const metadata: Metadata = {
   description: 'Page du club de tennis de table de Groisy',
 }
 
-/** @todo title and section tag ; replace isDesktop my md queries to hide components ; fix dark mode flash by creating a beforeInteractive.tsx in utils (https://nextjs.org/docs/pages/api-reference/components/script) and just using setDark in the useEffect ; use straou for home content and blog section ; set pagination ; export strapi schemas */
+/** @todo use strapi for home content and blog section ; set pagination */
 export default function RootLayout({
   children,
 }: {
   children: ReactNode
 }) {
   return (
-    <html lang="en">
+    <html className="opacity-0 transition-opacity" lang="en">
       <body className={`h-screen flex flex-col bg-background ${poppins.className} ${poppinsSemiBold.className}`}>
         <TopBar links={navLinks} />
         <main className="mt-16 grow grid place-items-start">{children}</main>
+
       </body>
     </html>
   )
