@@ -13,4 +13,7 @@ COPY . /usr/src/app
 RUN npm run build
 EXPOSE 1337
 
+RUN chown -R node:node .
+USER node
+
 ENTRYPOINT ["npm", "run"]

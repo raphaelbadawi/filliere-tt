@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   description: 'Page du club de tennis de table de Groisy',
 }
 
-/** @todo use strapi for home content and blog section ; set pagination */
 export default function RootLayout({
   children,
 }: {
