@@ -5,6 +5,8 @@ services:
       context: ./front
     ports:
       - "3000:3000"
+    depends_on:
+      - filliere-tt-strapi
   filliere-tt-strapi:
     build:
       context: ./back

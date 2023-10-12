@@ -1,7 +1,7 @@
 export default async function getPosts() {
   const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
   const res = await fetch(
-    `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/posts`,
+    `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/posts?populate=*`,
     { headers: { Authorization: bearer } }
   );
 
