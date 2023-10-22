@@ -14,8 +14,6 @@ const contents = [
   }
 ]
 
-// TODO : pass texts and images and use images as faces background
-
 export default function Home() {
   return (
     <section id="home" className="w-full">

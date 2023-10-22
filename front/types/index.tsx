@@ -1,4 +1,4 @@
-export default interface Post {
+export interface Post {
     id: number,
     attributes: {
         title: string,
@@ -28,3 +28,7 @@ export default interface Post {
         }
     }
 }
+
+export interface SearchParams {
+    page?: number;
+  };
