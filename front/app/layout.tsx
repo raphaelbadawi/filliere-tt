@@ -31,7 +31,6 @@ export default function RootLayout({
       <body className={`h-screen flex flex-col bg-background ${poppins.className} ${poppinsSemiBold.className}`}>
         <TopBar links={navLinks} />
         <main className="mt-16 grow grid place-items-start">{children}</main>
-
       </body>
     </html>
   )

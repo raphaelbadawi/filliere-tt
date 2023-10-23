@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "content": {
-      "type": "text",
-      "required": true
-    },
     "picture": {
       "type": "media",
       "multiple": false,
@@ -30,6 +26,10 @@
         "videos",
         "audios"
       ]
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
