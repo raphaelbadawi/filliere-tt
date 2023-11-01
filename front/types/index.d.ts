@@ -1,7 +1,8 @@
-export interface Post {
+export interface Card {
     id: number,
     attributes: {
         title: string,
+        caption?: string,
         content: string,
         createdAt: string,
         updatedAt: string,
@@ -28,6 +29,8 @@ export interface Post {
         }
     }
 }
+
+export interface Post extends Card {}
 
 export interface SearchParams {
     page?: number;
