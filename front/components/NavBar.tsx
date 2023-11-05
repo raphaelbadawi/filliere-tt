@@ -26,7 +26,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
     const computeActiveIndex = () => {
         let activeIndex = -1;
         links.forEach((link, index) => {
-            if (link.href == pathname) {
+            if (pathname.startsWith(link.href)) {
                 activeIndex = index;
             }
         })
@@ -60,7 +60,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
                         onMouseEnter={() => handleMouseEnter(index)}
                     >
                         <Link
-                            className={`flex items-center gap-1 nav-link text-xl font-semibold transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-secondary"}`}
+                            className={`flex items-center gap-1 nav-link text-xl font-semibold transition-colors duration-300 ease-in-out ${pathname.startsWith(link.href) ? "text-accent" : "text-secondary"}`}
                             href={{ pathname: link.href }}
                         >
                             <span className="icon">{link.icon}</span>

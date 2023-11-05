@@ -11,13 +11,12 @@ export default async function News({ searchParams }: { searchParams: SearchParam
     const totalPosts = meta.pagination.total;
     const totalPageCount = Math.ceil(totalPosts / pageSize);
 
-    /** @todo create single post page, add tags and comments, add captcha to comments */
     return (
-        <div className="w-full px-4">
+        <section id="news" className="w-full px-4">
             {data && data.map((post: Post, index: number) =>
                 <PostSnippet index={index} post={post} />
             )}
             <Paginator endpoint="/news" pageNumber={pageNumber} totalPageCount={totalPageCount} pageSize={pageSize} totalPosts={totalPosts} />
-        </div>
+        </section>
     )
 }

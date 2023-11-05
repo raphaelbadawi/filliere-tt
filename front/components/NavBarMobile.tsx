@@ -39,7 +39,7 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
                         className="nav-item relative"
                     >
                         <Link
-                            className={`flex items-center  gap-1 nav-link text-xl font-semibold uppercase transition-colors duration-300 ease-in-out ${pathname == link.href ? "text-accent" : "text-foreground"}`}
+                            className={`flex items-center  gap-1 nav-link text-xl font-semibold uppercase transition-colors duration-300 ease-in-out ${pathname.startsWith(link.href) ? "text-accent" : "text-foreground"}`}
                             href={{ pathname: link.href }}
                         >
                             <span className="icon">{link.icon}</span>
