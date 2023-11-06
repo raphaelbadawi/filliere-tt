@@ -713,6 +713,7 @@ export interface ApiPostPost extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: true;
+    populateCreatorFields: true;
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -722,10 +723,8 @@ export interface ApiPostPost extends Schema.CollectionType {
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
   };
 }
 

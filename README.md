@@ -16,11 +16,30 @@ It is possible to modify those values afterwards, but please note that if you ch
 
 `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
 
+If changes are made to the configuration (e.g. backoffice layout and labels, users roles) and you need to export the configuration again:
+```bash
+docker ps # spot your running strapi container name
+docker exec -it <container_name> /bin/sh
+cd /usr/src/app
+npm run strapi export -- --exclude files,content --no-encrypt --no-compress  # don't --exclude files,content if you need to backup your data along with the configuration
+mv export_* config.tar
+exit
+```
+
 ### Prod
 
 First set a nginx reverse proxy to proxy HTTPS to HTTP 3000 and HTTPS 1337 to HTTP 1337.
 
 Then you can run `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`
+
+If you need to restore the configuration:
+```bash
+docker ps # spot your running strapi container name
+docker exec -it <container_name> /bin/sh
+cd /usr/src/app
+npm run strapi import -- --f ./config/config.tar  # WARNING: this will erase any previous configuration _and_ data
+exit
+```
 
 ## Update packages
 

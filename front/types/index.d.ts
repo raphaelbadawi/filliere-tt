@@ -34,6 +34,15 @@ export interface Card {
 
 interface PostAttributes extends CardAttributes {
     slug: string,
+    createdBy: {
+        data: {
+            id: number,
+            attributes: {
+                firstname: string,
+                lastname: string,
+            }
+        }
+    },
 }
 
 export interface Post extends Card {

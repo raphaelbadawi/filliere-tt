@@ -11,9 +11,9 @@ export default function PostSnippet({index, post}: {index: number, post: Post}) 
                 <Link href="#" className="px-2 py-1 font-bold rounded bg-accent text-white">TAG</Link>
             </div>
             <div className="mt-3">
-                <Link href={`/news/${post.attributes.slug}`} className="text-3xl font-bold hover:underline">{post.attributes.title}</Link>
+                <Link href={`/news/${post.attributes.slug}`} className="text-white text-3xl font-bold hover:underline">{post.attributes.title}</Link>
                 {post.attributes.picture.data && <Image width="160" height="160" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${post.attributes.picture.data.attributes.formats.small.url}`} alt="Image" className="object-cover h-40 w-40 mt-2 rounded"></Image>}
-                <p className="mt-2">{post.attributes.content.length > 300 ? post.attributes.content.substring(0, 300) + "..." : post.attributes.content}</p>
+                <p className="mt-3 text-white">{post.attributes.content.length > 300 ? post.attributes.content.substring(0, 300) + "..." : post.attributes.content}</p>
             </div>
             <Link href={`/news/${post.attributes.slug}`} className="mt-3 hover:underline text-accent cursor-pointer">Voir plus</Link>
         </div>
