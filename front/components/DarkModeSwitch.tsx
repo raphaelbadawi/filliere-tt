@@ -31,7 +31,7 @@ export default function DarkModeSwitch() {
     return (
         isDark !== null && <button
             type="button"
-            className="hover:bg-background transition-all rounded-lg p-2"
+            className="bg-background transition-all rounded-lg p-2"
             onClick={toggleDarkMode}
         >
 

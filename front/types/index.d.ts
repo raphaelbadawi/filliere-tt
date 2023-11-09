@@ -32,6 +32,18 @@ export interface Card {
     attributes: CardAttributes,
 }
 
+export interface Comment {
+    id: number,
+    attributes: {
+        author: string,
+        email: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+        publishedAt: string,
+    }
+}
+
 interface PostAttributes extends CardAttributes {
     slug: string,
     createdBy: {
@@ -42,6 +54,9 @@ interface PostAttributes extends CardAttributes {
                 lastname: string,
             }
         }
+    },
+    comments: {
+        data: Comment[]
     },
 }
 

@@ -6,7 +6,7 @@ Little website for a tennis table club.
 
 You need to fill the user and password values in the .env files in the backend folder. Fill them as it pleases you.
 
-Regarding the tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` to reuse the token values it has generated in its .env file: you'll be sure they are intrinsincally valid.
+Regarding the tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid.
 
 It is possible to modify those values afterwards, but please note that if you change the token values, all existing API tokens will be invalidated and you will need to generate new ones using the Strapi admin UI.
 
