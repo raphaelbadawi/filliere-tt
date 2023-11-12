@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 
 export default function Paginator({endpoint, pageNumber, totalPageCount, pageSize, totalPosts}: {endpoint: string, pageNumber: number, totalPageCount: number, pageSize: number, totalPosts: number}) {
-    return (<div className="sticky bottom-0 z-50 flex justify-center my-4 space-x-2">
+    return (<div className="sticky bottom-0 z-20 flex justify-center my-4 space-x-2">
         {pageNumber > 1 && (
             <Link
                 className="px-3 py-1 ml-4 flex items-center border rounded bg-accent hover:bg-white text-white hover:text-accent transition-all"

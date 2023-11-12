@@ -14,7 +14,7 @@ export default async function News({ searchParams }: { searchParams: SearchParam
     return (
         <section id="news" className="w-full px-4">
             {data && data.map((post: Post, index: number) =>
-                <PostSnippet index={index} post={post} />
+                <PostSnippet key={index} index={index} post={post} />
             )}
             <Paginator endpoint="/news" pageNumber={pageNumber} totalPageCount={totalPageCount} pageSize={pageSize} totalPosts={totalPosts} />
         </section>

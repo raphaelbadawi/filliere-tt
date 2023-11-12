@@ -49,8 +49,8 @@ export default function NavBar({ links }: { links: { href: string, title: string
     }, [pathname]);
 
     return (
-        <nav className="relative w-full shadow-lg shadow-primary">
-            <Link className="absolute m-2 z-10" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
+        <nav className="hidden lg:flex relative w-full shadow-lg shadow-primary">
+            <Link className="absolute m-2" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
             <ul className="relative left-1/2 -translate-x-1/2 flex p-4 gap-4 justify-center" onMouseLeave={handleMouseLeave}
             >
                 {links && links.map((link, index) =>

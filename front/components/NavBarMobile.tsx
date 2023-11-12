@@ -25,14 +25,14 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
     ]
 
     return (
-        <nav className="absolute left-0">
-            <Link className="fixed m-2 z-20" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
-            <button className="nav-burger fixed z-20 left-16 top-6 p-2 rounded-md" onClick={() => setOpen(!open)}>
+        <nav className="flex lg:hidden relative left-0 gap-2">
+            <Link className="z-20 m-2" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
+            <button className="z-20 nav-burger rounded-md" onClick={() => setOpen(!open)}>
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[0]} />
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[1]} />
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[2]} />
             </button>
-            <ul className={`fixed z-10 pt-24 flex flex-col justify-start p-4 gap-4 rounded-br-xl rounded- bg-background shadow-xl shadow-primary ${open ? "translate-x-0" : "-translate-x-full"} transition-all duration-300`}>
+            <ul className={`absolute pt-16 flex flex-col justify-start p-4 gap-4 rounded-br-xl rounded- bg-background shadow-primary ${open ? "translate-x-0 shadow-xl" : "-translate-x-full shadow-nonz"} transition-all duration-300`}>
                 {links && links.map((link, index) =>
                     <li
                         key={index}
@@ -48,6 +48,6 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
                     </li>
                 )}
             </ul>
-            <span className="fixed right-2 z-20 top-6"><DarkModeSwitch  /></span>
+            <span className="absolute right-2 top-2"><DarkModeSwitch  /></span>
         </nav>)
 }

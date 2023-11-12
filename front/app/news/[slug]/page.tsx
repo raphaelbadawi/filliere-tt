@@ -1,11 +1,11 @@
 
 import PostFull from "@/components/PostFull";
 import Comments from "@/components/containers/Comments";
-import getPost from "@/services/getPost";
+import getPosts from "@/services/getPosts";
 
 export default async function SingleNews({ params }: { params: { slug: string } }) {
-    /** @todo add optional filtering logic to getPosts service, add tags and comments, show comments count in post snippets, add captcha to comments */
-    const { data: post } = await getPost(params.slug);
+    /** @todo add tags and comments form, show comments count in post snippets, add captcha to comments */
+    const { data: post } = await getPosts(1, 1, {slug: params.slug});
     return (
         <div className="w-full flex flex-col">
             <section id="singleNews" className="w-full p-4">

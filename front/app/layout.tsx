@@ -6,7 +6,6 @@ import TopBar from '@/components/TopBar';
 import { ReactNode } from 'react';
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
-const poppinsSemiBold = Poppins({ weight: "600", subsets: ["latin"] });
 
 const navLinks: { href: string, title: string, icon: ReactNode }[] = [
   { href: "/news", title: "Actualités du club", icon: <FaNewspaper /> },
@@ -28,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html className="opacity-0 transition-opacity" lang="en">
-      <body className={`h-screen flex flex-col bg-background ${poppins.className} ${poppinsSemiBold.className}`}>
+      <body className={`h-screen flex flex-col bg-background ${poppins.className}`}>
         <TopBar links={navLinks} />
         <main className="mt-16 grow grid place-items-start">{children}</main>
       </body>
