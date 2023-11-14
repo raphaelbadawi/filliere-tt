@@ -1,11 +1,9 @@
-export default async function getPosts(pageNumber: number, pageSize: number, filters?: object) {
+export default async function getPosts(pageNumber: number, pageSize: number, filters?: string) {
   let append = "";
-  if (typeof filters != "undefined" && Object.keys(filters).length) {
-    append += "&filters=";
-    for (const [key, value] of Object.entries(filters)) {
-      append += `\[${key}\][$eq]=${value}`;
-    } 
+  if (typeof filters != "undefined" && filters.length > 0) {
+    append = filters;
   }
+
   const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
   const res = await fetch(
     `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/posts?pagination[page]=${pageNumber}&pagination[pageSize]=${pageSize}&sort=createdAt:desc${append}&populate=*`,

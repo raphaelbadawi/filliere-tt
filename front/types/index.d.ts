@@ -32,16 +32,28 @@ export interface Card {
     attributes: CardAttributes,
 }
 
+export interface CommentAttributes {
+    author: string,
+    email: string,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+    post: number,
+}
+
+export interface TagAttributes {
+    tag: string,
+}
+
 export interface Comment {
     id: number,
-    attributes: {
-        author: string,
-        email: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        publishedAt: string,
-    }
+    attributes: CommentAttributes,
+}
+
+export interface Tag {
+    id: number,
+    attributes: TagAttributes,
 }
 
 interface PostAttributes extends CardAttributes {
@@ -56,8 +68,11 @@ interface PostAttributes extends CardAttributes {
         }
     },
     comments: {
-        data: Comment[]
+        data: Comment[],
     },
+    tags: {
+        data: Tag[],
+    }
 }
 
 export interface Post extends Card {
@@ -66,4 +81,5 @@ export interface Post extends Card {
 
 export interface SearchParams {
     page?: number,
+    tagId?: number,
 };

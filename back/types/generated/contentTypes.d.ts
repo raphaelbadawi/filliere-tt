@@ -763,11 +763,35 @@ export interface ApiPostPost extends Schema.CollectionType {
       'oneToMany',
       'api::comment.comment'
     >;
+    tags: Attribute.Relation<'api::post.post', 'manyToMany', 'api::tag.tag'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    posts: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::post.post'>;
+    tag: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
   };
 }
 
@@ -819,6 +843,7 @@ declare module '@strapi/types' {
       'api::card.card': ApiCardCard;
       'api::comment.comment': ApiCommentComment;
       'api::post.post': ApiPostPost;
+      'api::tag.tag': ApiTagTag;
       'api::title.title': ApiTitleTitle;
     }
   }

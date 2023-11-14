@@ -8,7 +8,7 @@ export default function PostSnippet({index, post}: {index: number, post: Post}) 
         <div key={index} className="mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black ">
             <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>
-                <Link href="#" className="px-2 py-1 font-bold rounded bg-accent text-white">TAG</Link>
+                {post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="px-2 py-1 font-bold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}
             </div>
             <div className="mt-3">
                 <Link href={`/news/${post.attributes.slug}`} className="text-white text-3xl font-bold hover:underline">{post.attributes.title}</Link>
