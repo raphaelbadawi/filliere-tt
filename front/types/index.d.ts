@@ -32,14 +32,17 @@ export interface Card {
     attributes: CardAttributes,
 }
 
-export interface CommentAttributes {
+export interface CommentPostAttributes {
     author: string,
     email: string,
-    content: string,
+    content: string, 
+    post: number,
+    publishedAt: string|null,
+}
+
+export interface CommentAttributes extends CommentPostAttributes {
     createdAt: string,
     updatedAt: string,
-    publishedAt: string,
-    post: number,
 }
 
 export interface TagAttributes {
