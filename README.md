@@ -43,7 +43,7 @@ exit
 
 ## Update packages
 
-Updating packages is as simple as modifying the package.json files with the target versions, running `npm install` locally to update the package-lock.json packages, and then adding the --build flag at the end of the next compose command to rebuild the Docker images.
+Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker-compose command to rebuild the image.
 
 # Dev
 
