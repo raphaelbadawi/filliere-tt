@@ -4,7 +4,7 @@ import Comments from "@/components/containers/Comments";
 import getPosts from "@/services/getPosts";
 
 export default async function SingleNews({ params }: { params: { slug: string } }) {
-    /** @todo add comments form, add react-toastify library for comments feedback, setup form validation (use zod library), show only 5 pagination buttons (<<, <, X, >, >>) and only if there is more than 1 page, show comments count in post snippets, add captcha to comments, glowing effect around cursor on post snippet hover, export config */
+    /** @todo submit comment and show toaster (react-toastify) on submit feedback ; show only 5 pagination buttons (<<, <, X, >, >>) and only if there is more than 1 page, show comments count in post snippets, add captcha to comments, glowing effect around cursor on post snippet hover, export config */
     let filters = "&filters[slug][$eq]=" + params.slug;
     const { data: post } = await getPosts(1, 1, filters);
     return (
