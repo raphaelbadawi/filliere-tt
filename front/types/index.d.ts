@@ -37,7 +37,7 @@ export interface CommentPostAttributes {
     email: string,
     content: string, 
     post: number,
-    publishedAt: string|null,
+    publishedAt?: string|null,
 }
 
 export interface CommentAttributes extends CommentPostAttributes {

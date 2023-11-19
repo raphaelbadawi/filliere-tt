@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { z } from "zod"
 import Spinner from "./Spinner";
 import { Post } from "@/types";
 import postComment from "@/services/postComment";
+import { verifyCaptcha } from "@/services/verifyCaptcha";
 
 export default function CommentForm({ post }: { post: Post }) {
     const commentFormSchema = z.object({
@@ -15,15 +17,29 @@ export default function CommentForm({ post }: { post: Post }) {
         comment: z.string().min(10, "Votre commentaire doit faire au moins 10 caractères"),
     });
 
+    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY);
+
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [comment, setComment] = useState("");
     const [spinner, setSpinner] = useState(false);
     const [errors, setErrors] = useState<z.inferFlattenedErrors<typeof commentFormSchema>>();
     const [hasErrors, setHasErrors] = useState(false);
+
+    const recaptchaRef = useRef<ReCAPTCHA>(null)
+    const [isVerified, setIsVerified] = useState<boolean>(false)
+    async function onReCAPTCHAChange(token: string | null) {
+        const res = await verifyCaptcha(token);
+        if (res != "OK") {
+            setIsVerified(false);
+            return;
+        }
+        setIsVerified(true);
+    }
+
     let hasDarkMode = false;
     useEffect(() => {
-        hasDarkMode = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); 
+        hasDarkMode = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
     }, [])
 
     const clickHandler: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -35,8 +51,11 @@ export default function CommentForm({ post }: { post: Post }) {
                 setHasErrors(true);
                 return;
             }
-
             setHasErrors(false);
+            if (!isVerified) {
+                toast.error("Veuillez cocher la case qui vérifie que vous n'êtes pas un robot");
+                return;
+            }
             setSpinner(true);
             const res = await postComment({ author: username, email, content: comment, post: post.id })
             setSpinner(false);
@@ -67,7 +86,7 @@ export default function CommentForm({ post }: { post: Post }) {
                     </div>
                     <div className="flex flex-col flex-grow">
                         <label className="block text-gray-700 text-sm font-bold" htmlFor="emailInput">
-                            Mon mail
+                            Mon email
                         </label>
                         <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="emailInput" name="emailInput" onChange={e => setEmail(e.target.value)} type="email" placeholder="Mon email"></input>
                         {hasErrors && errors?.fieldErrors?.email && (
@@ -91,6 +110,11 @@ export default function CommentForm({ post }: { post: Post }) {
                         )}
                         Publier
                     </button>
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY || ""}
+                        onChange={onReCAPTCHAChange}
+                    />
                     <ToastContainer theme={hasDarkMode ? "dark" : "light"} />
                     <label className="block text-gray-700 text-xs" htmlFor="commentButton">
                         Le commentaire ne sera visible qu'après validation par un modérateur
