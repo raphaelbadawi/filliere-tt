@@ -20,3 +20,31 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
 }
+
+.cursor-aura {
+  display: block;
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  background-color: rgb(var(--accent-rgb));
+  box-shadow: 0px 0px 50px 100px rgb(var(--accent-rgb));
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse 5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(5) translate(-50%, -50%);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 0.1;
+  }
+}
+
+.cursor-aura-receptor {
+  position: relative;
+  overflow: hidden;
+}

@@ -4,7 +4,6 @@ import Comments from "@/components/containers/Comments";
 import getPosts from "@/services/getPosts";
 
 export default async function SingleNews({ params }: { params: { slug: string } }) {
-    /** @todo show comments count in post snippets, glowing effect around cursor on post snippet hover, export config */
     let filters = "&filters[slug][$eq]=" + params.slug;
     const { data: post } = await getPosts(1, 1, filters);
     return (

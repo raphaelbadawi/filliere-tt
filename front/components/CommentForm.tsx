@@ -17,8 +17,6 @@ export default function CommentForm({ post }: { post: Post }) {
         comment: z.string().min(10, "Votre commentaire doit faire au moins 10 caractères"),
     });
 
-    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY);
-
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [comment, setComment] = useState("");
