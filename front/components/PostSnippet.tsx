@@ -1,9 +1,10 @@
 import { Post } from "@/types";
 import Date from "@/components/Date";
-import Image from "next/image"; 
+import Image from "next/image";
 import Link from "next/link";
+import { FaComment } from "react-icons/fa6";
 
-export default function PostSnippet({index, post}: {index: number, post: Post}) {
+export default function PostSnippet({ index, post }: { index: number, post: Post }) {
     return (
         <div key={index} className="mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black cursor-aura-receptor">
             <div className="relative flex items-center justify-between">
@@ -15,7 +16,10 @@ export default function PostSnippet({index, post}: {index: number, post: Post}) 
                 {post.attributes.picture.data && <Image width="160" height="160" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${post.attributes.picture.data.attributes.formats.small.url}`} alt="Image" className="object-cover h-40 w-40 mt-2 rounded"></Image>}
                 <p className="mt-3 text-white">{post.attributes.content.length > 300 ? post.attributes.content.substring(0, 300) + "..." : post.attributes.content}</p>
             </div>
-            <Link href={`/news/${post.attributes.slug}`} className="relative mt-3 hover:underline text-accent cursor-pointer">Voir plus</Link>
+            <div className="relative flex items-center justify-between">
+                <Link href={`/news/${post.attributes.slug}`} className="mt-3 hover:underline text-accent cursor-pointer">Voir plus</Link>
+                <div className="flex items-center gap-1"><FaComment />{post.attributes.comments.data.length }</div>
+            </div>
         </div>
     )
 }

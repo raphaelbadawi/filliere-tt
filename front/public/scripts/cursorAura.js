@@ -7,8 +7,8 @@ const cursorHauraHandler = (e) => {
     return;
   }
   // Get the mouse coordinates
-  let mouseX = e.pageX;
-  let mouseY = e.pageY;
+  let mouseX = e.clientX;
+  let mouseY = e.clientY;
 
   // Calculate the position
   let receptorOffset = currentReceptor.getBoundingClientRect();

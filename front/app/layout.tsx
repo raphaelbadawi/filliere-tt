@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-/** @todo show comments count in post snippets,  export config, remaining pages, newsletter */
+/** @todo export config, remaining pages, newsletter */
 export default function RootLayout({
   children,
 }: {
