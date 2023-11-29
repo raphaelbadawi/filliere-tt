@@ -53,10 +53,9 @@ export default function SimpleForm({ submitHandler, title, contentValidationStri
                 return;
             }
             setSpinner(true);
-            submitHandler();
-            setSpinner(false);
             const res = await submitHandler(username, email, content);
-            if (res != "OK") {
+            setSpinner(false);
+            if (!res.ok && res != "OK") {
                 toast.error("Quelque chose s'est mal passé");
                 return;
             }
