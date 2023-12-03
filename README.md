@@ -22,7 +22,7 @@ docker ps # spot your running strapi container name
 docker exec -it <container_name> /bin/sh
 cd /usr/src/app
 npm run strapi export -- --exclude files,content --no-encrypt --no-compress  # don't --exclude files,content if you need to backup your data along with the configuration
-mv export_* config.tar
+mv -f export_* config.tar
 exit
 ```
 

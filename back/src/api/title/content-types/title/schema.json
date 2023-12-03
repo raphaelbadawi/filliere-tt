@@ -4,7 +4,8 @@
   "info": {
     "singularName": "title",
     "pluralName": "titles",
-    "displayName": "Title"
+    "displayName": "Title",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }

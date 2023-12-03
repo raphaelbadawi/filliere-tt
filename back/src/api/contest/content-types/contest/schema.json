@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contests",
+  "info": {
+    "singularName": "contest",
+    "pluralName": "contests",
+    "displayName": "Contest"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "requestLink": {
+      "type": "string",
+      "required": true
+    },
+    "teamName": {
+      "type": "string",
+      "required": true
+    },
+    "contestName": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

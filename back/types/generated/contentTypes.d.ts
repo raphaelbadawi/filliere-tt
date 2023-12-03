@@ -741,6 +741,38 @@ export interface ApiCommentComment extends Schema.CollectionType {
   };
 }
 
+export interface ApiContestContest extends Schema.CollectionType {
+  collectionName: 'contests';
+  info: {
+    singularName: 'contest';
+    pluralName: 'contests';
+    displayName: 'Contest';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    requestLink: Attribute.String & Attribute.Required;
+    teamName: Attribute.String & Attribute.Required;
+    contestName: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contest.contest',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contest.contest',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Schema.CollectionType {
   collectionName: 'posts';
   info: {
@@ -769,6 +801,65 @@ export interface ApiPostPost extends Schema.CollectionType {
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
+  };
+}
+
+export interface ApiPracticalPractical extends Schema.SingleType {
+  collectionName: 'practicals';
+  info: {
+    singularName: 'practical';
+    pluralName: 'practicals';
+    displayName: 'Practical';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    content: Attribute.RichText & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::practical.practical',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::practical.practical',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubscriptionSubscription extends Schema.SingleType {
+  collectionName: 'subscriptions';
+  info: {
+    singularName: 'subscription';
+    pluralName: 'subscriptions';
+    displayName: 'Subscription';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    content: Attribute.RichText & Attribute.Required;
+    file: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::subscription.subscription',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::subscription.subscription',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -801,12 +892,13 @@ export interface ApiTitleTitle extends Schema.SingleType {
     singularName: 'title';
     pluralName: 'titles';
     displayName: 'Title';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -842,7 +934,10 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::card.card': ApiCardCard;
       'api::comment.comment': ApiCommentComment;
+      'api::contest.contest': ApiContestContest;
       'api::post.post': ApiPostPost;
+      'api::practical.practical': ApiPracticalPractical;
+      'api::subscription.subscription': ApiSubscriptionSubscription;
       'api::tag.tag': ApiTagTag;
       'api::title.title': ApiTitleTitle;
     }
