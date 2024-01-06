@@ -6,7 +6,7 @@ Little website for a tennis table club.
 
 You need to fill the user and password values in the .env files in the backend folder. Fill them as it pleases you.
 
-Regarding the tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid.
+Regarding the app tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid.
 
 It is possible to modify those values afterwards, but please note that if you change the token values, all existing API tokens will be invalidated and you will need to generate new ones using the Strapi admin UI.
 
@@ -26,6 +26,8 @@ mv -f export_* config.tar
 exit
 ```
 
+You will need to generate an API token in Strapi configuration and fill it in the .env.development.local file in the ./front folder. In a dev environment, you can use a full access token.
+
 ### Prod
 
 First set a nginx reverse proxy to proxy HTTPS to HTTP 3000 and HTTPS 1337 to HTTP 1337.
@@ -37,9 +39,11 @@ If you need to restore the configuration:
 docker ps # spot your running strapi container name
 docker exec -it <container_name> /bin/sh
 cd /usr/src/app
-npm run strapi import -- --f ./config/config.tar  # WARNING: this will erase any previous configuration _and_ data
+npm run strapi import -- -f ./config.tar  # WARNING: this will erase any previous configuration _and_ data
 exit
 ```
+
+You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
 
 ## Update packages
 

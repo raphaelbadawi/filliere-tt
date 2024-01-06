@@ -1,7 +1,7 @@
 version: "3"
 services:
   filliere-tt:
-    command: prod
+    command: start
   filliere-tt-strapi:
     command: start
     env_file:

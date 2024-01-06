@@ -6,7 +6,11 @@ import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import i18N from "@strapi/plugin-i18n/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
+import customisations from "../../src/admin/app.ts";
+
 renderAdmin(document.getElementById("strapi"), {
+  customisations,
+
   plugins: {
     "users-permissions": usersPermissions,
     i18n: i18N,
