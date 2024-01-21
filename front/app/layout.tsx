@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-/** @todo remaining pages, newsletter */
+/** @todo subscribe, contest, newsletter (link in footer) */
 export default function RootLayout({
   children,
 }: {
