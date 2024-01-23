@@ -1,7 +1,7 @@
 export default async function getSingle(type: string = "title") {
     const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
     const res = await fetch(
-        `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/${type}`,
+        `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/${type}?populate=*`,
         { headers: { Authorization: bearer }, cache: "no-store" }
     );
     if (!res.ok) {

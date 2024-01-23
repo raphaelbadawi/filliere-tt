@@ -1,8 +1,9 @@
 import { remark } from 'remark';
 import html from 'remark-html';
 import getSingle from "@/services/getSingle";
+import SimpleHtmlContainer from '@/components/containers/SimpleHtmlContainer';
 
-export default async function Pratical() {
+export default async function Practical() {
     const { data: practicalObject } = await getSingle("practical");
     const processedContent = await remark()
         .use(html)
@@ -10,8 +11,7 @@ export default async function Pratical() {
     const contentHtml = processedContent.toString().replaceAll("<a href", "<a target=\"_blank\" href");
     return (
         <section id="practical" className="w-full">
-            <div dangerouslySetInnerHTML={{__html: contentHtml}} className="prose prose-invert flex flex-col gap-3 w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-black to-white">
-            </div>
+            <SimpleHtmlContainer contentHtml={contentHtml} />
         </section>
 
     )
