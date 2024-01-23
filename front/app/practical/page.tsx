@@ -1,14 +1,11 @@
-import { remark } from 'remark';
-import html from 'remark-html';
+
 import getSingle from "@/services/getSingle";
 import SimpleHtmlContainer from '@/components/containers/SimpleHtmlContainer';
+import parseMarkdown from "@/utils/parseMarkdown";
 
 export default async function Practical() {
     const { data: practicalObject } = await getSingle("practical");
-    const processedContent = await remark()
-        .use(html)
-        .process(practicalObject.attributes.content || "")
-    const contentHtml = processedContent.toString().replaceAll("<a href", "<a target=\"_blank\" href");
+    const contentHtml = await parseMarkdown(practicalObject.attributes.content);
     return (
         <section id="practical" className="w-full">
             <SimpleHtmlContainer contentHtml={contentHtml} />

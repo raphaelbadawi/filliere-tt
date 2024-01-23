@@ -49,6 +49,24 @@ You will need to generate an API token in Strapi configuration and fill it in th
 
 Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker-compose command to rebuild the image.
 
+### Update without downtime
+
+Use docker swarm: `docker swarm init`. Follow the instructions returned by the swarm init command if you want to add other hosts to the swarm.
+
+Then to run the service, instead of directly running docker-compose, you can run : `docker stack deploy -c docker-compose.yml -c  docker-compose.prod.yml filliere-tt`. Then after each update you can just run the same command again to update the images and have all the handing over between outdated and updated containers as well as the following cleanup being handled automatically.
+
+With swarm, you can add healtchecks on your compose files. For example, for Strapi, you could use:
+```yml
+    healthcheck:
+      test: curl --fail http://localhost:1337 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+```
+
+You can also automate the deployment by setting up git jobs on events like push tags * to copy an updated code base to the host and to run shell commands as well.
+
 # Dev
 
 # Frontend
