@@ -4,15 +4,16 @@
   "info": {
     "singularName": "contest",
     "pluralName": "contests",
-    "displayName": "Contest"
+    "displayName": "Contest",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "requestLink": {
-      "type": "string",
+    "requestBody": {
+      "type": "text",
       "required": true
     },
     "teamName": {
@@ -21,6 +22,10 @@
     },
     "contestName": {
       "type": "string",
+      "required": true
+    },
+    "teamId": {
+      "type": "integer",
       "required": true
     }
   }

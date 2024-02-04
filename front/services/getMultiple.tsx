@@ -1,7 +1,7 @@
-export default async function getCards() {
+export default async function getMultiple(type: string = "cards") {
     const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
     const res = await fetch(
-        `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/cards?populate=*`,
+        `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/${type}/?populate=*`,
         { headers: { Authorization: bearer }, cache: "no-store" }
     );
     if (!res.ok) {

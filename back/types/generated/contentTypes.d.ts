@@ -838,14 +838,16 @@ export interface ApiContestContest extends Schema.CollectionType {
     singularName: 'contest';
     pluralName: 'contests';
     displayName: 'Contest';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    requestLink: Attribute.String & Attribute.Required;
+    requestBody: Attribute.Text & Attribute.Required;
     teamName: Attribute.String & Attribute.Required;
     contestName: Attribute.String & Attribute.Required;
+    teamId: Attribute.Integer & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

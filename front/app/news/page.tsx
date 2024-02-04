@@ -23,7 +23,7 @@ export default async function News({ searchParams }: { searchParams: SearchParam
 
     return (
         <section id="news" className="w-full px-4">
-            {tagId && <Link rel="noopener noreferrer" href="/news" className="block mt-3 hover:underline text-accent cursor-pointer">Retour aux actualités</Link>}
+            {tagId && <Link rel="noopener noreferrer" href="/news" className="block mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>}
             {tagId && <Title text={tagName.toUpperCase()}></Title>}
             {data && data.map((post: Post, index: number) =>
                 <PostSnippet key={index} index={index} post={post} />

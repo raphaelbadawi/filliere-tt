@@ -9,7 +9,7 @@ export default async function PostFull({post}: {post: Post}) {
 
     return (
         <div className="w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black">
-            <Link rel="noopener noreferrer" href="/news" className="mt-3 hover:underline text-accent cursor-pointer">Retour aux actualités</Link>
+            <Link rel="noopener noreferrer" href="/news" className="mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>
             <div className="mt-3 flex items-center justify-between">
                 <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>
                 {post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="px-2 py-1 font-bold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}

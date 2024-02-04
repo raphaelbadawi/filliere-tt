@@ -1,0 +1,193 @@
+{
+  poolsWithSportMatches_f3aabd7f2aae1ec6bb1411a73260301c: pools(
+    group_id: 150610
+  ) {
+    edges {
+      node {
+        id
+        name
+        playerOppositionSheet {
+          id
+          lines {
+            edges {
+              node {
+                awayPlayer
+                homePlayer
+                id
+                position
+              }
+            }
+          }
+          opponentCount
+          oppositionCount
+        }
+        roundGrid {
+          id
+          rounds {
+            edges {
+              node {
+                day {
+                  id
+                  position
+                }
+                id
+                roundNumber
+                startDate
+              }
+            }
+          }
+        }
+        sportMatches {
+          edges {
+            node {
+              awayGamePoints
+              awayOpponent {
+                id
+                team {
+                  id
+                  name
+                }
+              }
+              date
+              day {
+                id
+              }
+              forfeit
+              hasWarnings
+              homeGamePoints
+              homeOpponent {
+                id
+                team {
+                  id
+                  name
+                }
+              }
+              id
+              penalty
+              roundNumber
+              winner
+            }
+          }
+        }
+      }
+    }
+  }
+  poolsWithResults_585faa2c22aefd74e2fe8424c6657c6a: pools(group_id: 150610) {
+    edges {
+      node {
+        id
+        results {
+          edges {
+            node {
+              definitivePoints
+              definitiveRank
+              forfeit
+              gamePointLost
+              gamePointWin
+              id
+              modified
+              opponent {
+                id
+                team {
+                  id
+                  name
+                }
+              }
+              penality
+              pointsModified
+              sportMatchCount
+              sportMatchDraw
+              sportMatchLost
+              sportMatchWin
+            }
+          }
+        }
+      }
+    }
+  }
+  groupsWithTournamentTables_262cdfdf933868f629ed6207adbe41b5: groups(
+    id: 150610
+  ) {
+    edges {
+      node {
+        id
+        tournamentTable {
+          headers {
+            edges {
+              node {
+                column
+                id
+                name
+              }
+            }
+          }
+          id
+          name
+          slots {
+            edges {
+              node {
+                column
+                id
+                loserGoTo
+                row
+                sportMatch {
+                  awayGamePoints
+                  awayOpponent {
+                    id
+                    team {
+                      id
+                      name
+                    }
+                  }
+                  forfeit
+                  homeGamePoints
+                  homeOpponent {
+                    id
+                    team {
+                      id
+                      name
+                    }
+                  }
+                  id
+                  penalty
+                  winner
+                }
+                winnerGoTo
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  exceptionalSportMatches_45d8af857d2e9092c442d9aaeb84b30c: sportMatches(
+    exists: { pool: false, slot: false }
+    group_id: 150610
+  ) {
+    edges {
+      node {
+        awayGamePoints
+        awayOpponent {
+          id
+          team {
+            id
+            name
+          }
+        }
+        date
+        forfeit
+        homeGamePoints
+        homeOpponent {
+          id
+          team {
+            id
+            name
+          }
+        }
+        id
+        penalty
+        winner
+      }
+    }
+  }
+}

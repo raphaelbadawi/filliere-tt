@@ -1,11 +1,11 @@
 import FlipCard from "@/components/FlipCard";
 import Title from "@/components/Title";
-import getCards from "@/services/getCards";
+import getMultiple from "@/services/getMultiple";
 import getSingle from "@/services/getSingle";
 import { Card } from "@/types";
 
 export default async function Home() {
-  const { data: cards } : { data: Card[] } = await getCards();
+  const { data: cards } : { data: Card[] } = await getMultiple();
   const { data: titleObject } = await getSingle();
   return (
     <section id="home" className="w-full">
