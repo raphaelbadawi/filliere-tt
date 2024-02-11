@@ -1,12 +1,13 @@
+import { Contest } from "@/types";
+import ContestContainer from "@/components/containers/ContestContainer";
 import getMultiple from "@/services/getMultiple";
 
-export default async function Contact() {
-    const contests = await getMultiple("contests");
-    // make a select mapped to a targetContest state
-    // default targetContest will be for now the first available contest
-    // on each state change, trigger a getResults request and update state accordingly
-    // ladder and results should have their own individual components
+export default async function ContestPage() {
+    const { data } : { data: Contest[] } = await getMultiple("contests");
+
     return (
-        <div>Contest</div>
+        <section id="contest" className="w-full px-4">
+            <ContestContainer contests={data} />
+        </section>
     )
 }

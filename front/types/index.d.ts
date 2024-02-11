@@ -82,6 +82,17 @@ export interface Post extends Card {
     attributes: PostAttributes,
 }
 
+export interface ContestAttributes {
+    teamName: string,
+    contestName: string,
+    requestBody: string,
+    teamId: number,
+}
+
+export interface Contest extends Card {
+    attributes: ContestAttributes,
+}
+
 export interface SearchParams {
     page?: number,
     tagId?: number,

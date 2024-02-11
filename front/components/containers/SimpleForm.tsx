@@ -17,7 +17,7 @@ export default function SimpleForm({ submitHandler, title, contentValidationStri
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [content, setcontent] = useState("");
+    const [content, setContent] = useState("");
     const [spinner, setSpinner] = useState(false);
     const [errors, setErrors] = useState<z.inferFlattenedErrors<typeof contentFormSchema>>();
     const [hasErrors, setHasErrors] = useState(false);
@@ -94,7 +94,7 @@ export default function SimpleForm({ submitHandler, title, contentValidationStri
                     <label className="block text-gray-700 text-sm font-bold" htmlFor="contentInput">
                         {textAreaPlaceholder}
                     </label>
-                    <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="contentInput" name="contentInput" onChange={e => setcontent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
+                    <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="contentInput" name="contentInput" onChange={e => setContent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
                     {hasErrors && errors?.fieldErrors?.content && (
                         <p className="text-red-500">{errors.fieldErrors["content"]}</p>
                     )}

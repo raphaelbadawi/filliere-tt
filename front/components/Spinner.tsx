@@ -1,4 +1,4 @@
-export default function Spinnner({ height = "2rem", width = "2rem", thickness = "4px", addedClasses = "" }: { height: string, width: string, thickness: string, addedClasses: string }) {
+export default function Spinnner({ height = "2rem", width = "2rem", thickness = "4px", addedClasses = "" }: { height?: string, width?: string, thickness?: string, addedClasses?: string }) {
     return (
         <div
             style={{ minHeight: height, height: height, width: width, borderWidth: thickness }}
