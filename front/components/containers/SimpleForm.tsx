@@ -8,7 +8,7 @@ import { z } from "zod"
 import Spinner from "@/components/Spinner";
 import { verifyCaptcha } from "@/services/verifyCaptcha";
 
-export default function SimpleForm({ submitHandler, title, contentValidationString, textAreaPlaceholder, submitNotice, successNotice }: { submitHandler: Function, title: string, contentValidationString: string, textAreaPlaceholder: string, submitNotice: string, successNotice: string }) {
+export default function SimpleForm({ submitHandler, title, color = "primary", contentValidationString, textAreaPlaceholder, submitNotice, successNotice }: { submitHandler: Function, title: string, color?: string, contentValidationString: string, textAreaPlaceholder: string, submitNotice: string, successNotice: string }) {
     const contentFormSchema = z.object({
         username: z.string().min(3, "Le nom d'utilisateur doit faire au moins 3 caractères"),
         email: z.string().email("Vous devez saisir une adresse email valide"),
@@ -66,7 +66,7 @@ export default function SimpleForm({ submitHandler, title, contentValidationStri
     };
 
     return (
-        <div className="flex flex-col gap-3 w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-black to-white">
+        <div className={`flex flex-col gap-3 w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-transparent via-${color} to-transparent`}>
             <h2 className="text-3xl">{title}</h2>
             <hr className="border-white border-t-4 rounded-full"></hr>
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -100,7 +100,7 @@ export default function SimpleForm({ submitHandler, title, contentValidationStri
                     )}
                 </div>
                 <div className="mt-6 flex flex-col items-center gap-2">
-                    <button className="bg-primary text-white font-bold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:shadow-white hover:scale-110 transition-all duration-300" onClick={clickHandler} type="button" id="contentButton">
+                    <button className="bg-primary text-white font-bold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300" onClick={clickHandler} type="button" id="contentButton">
                         {spinner && (
                             <Spinner height="1rem" width="1rem" thickness="2px" addedClasses="mr-2" />
                         )}

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-/** @todo footer and newsletter */
+/** @todo refactor contest with new querying ; footer and newsletter */
 export default function RootLayout({
   children,
 }: {

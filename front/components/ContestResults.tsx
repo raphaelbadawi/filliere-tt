@@ -25,13 +25,15 @@ export default function ContestResults({ results, teamId }: { results: Results, 
         </>
     );
 
+    const isTeamHome = (game: Result) => game.node.homeOpponent && game.node.homeOpponent.team.id === `/api/teams/${teamId}`;
+
     const renderMatchDetail = (game: Result) => {
         let { awayGamePoints, homeGamePoints, awayOpponent, homeOpponent, date, winner } = game.node;
         if (!homeOpponent) {
-            homeOpponent = {id: "0", team: {id: "0", name: "N/A"}};
+            homeOpponent = { id: "0", team: { id: "0", name: "N/A" } };
         }
         if (!awayOpponent) {
-            awayOpponent = {id: "0", team: {id: "0", name: "N/A"}};
+            awayOpponent = { id: "0", team: { id: "0", name: "N/A" } };
         }
         const isHome = isTeamHome(game);
         const opponentName = isHome ? awayOpponent.team.name : homeOpponent.team.name;
@@ -51,12 +53,11 @@ export default function ContestResults({ results, teamId }: { results: Results, 
                     <div className="flex-1 pl-2">
                         {opponentName}
                     </div>
-                </div>]
+                </div>
             </div>
         );
     };
 
-    const isTeamHome = (game: Result) => game.node.homeOpponent?.team?.id || "N/A" === `/api/teams/${teamId}`;
 
     return (
         <div className="w-full bg-white rounded-lg my-2">

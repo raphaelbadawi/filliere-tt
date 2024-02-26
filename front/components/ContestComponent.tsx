@@ -12,7 +12,7 @@ export default function ContestComponent({ contest }: { contest: Contest }) {
         setResults({ ladder: null, results: null });
         getResults(contest.attributes.requestBody, contest.attributes.teamId).then(data => setResults(data));
     }, [contest])
-    console.log(results);
+
     return (
         <div className="mt-3 flex justify-center">
             {!results.ladder && (

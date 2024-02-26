@@ -1,0 +1,17 @@
+{
+  sportMatches(
+    first: 1
+    or: [{ awayOpponent_team_id: "11066" }, { homeOpponent_team_id: "11066" }]
+    order: [{ date: "DESC" }]
+  ) {
+    edges {
+      node {
+        id
+        division {
+          id
+          name
+        }
+      }
+    }
+  }
+}
