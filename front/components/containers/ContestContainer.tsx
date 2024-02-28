@@ -16,11 +16,11 @@ export default function ContestContainer({ contests }: { contests: Contest[] }) 
     }
     return (
         <>
-            <label htmlFor="contestSelect" className="block mt-3 text-base font-medium text-gray-900 dark:text-white">Choisissez une compétition</label>
+            <label htmlFor="contestSelect" className="block mt-3 text-base font-medium text-gray-900 dark:text-white">Choisissez une équipe</label>
             <select defaultValue={0} onChange={e => setTargetContest(parseInt(e.target.value))} name="contest" className="w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-300 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="contestSelect">
-                <option value={0} disabled>Choisissez une compétition</option>
+                <option value={0} disabled>Choisissez une équipe</option>
                 {contests && contests.map((contest: Contest, index: number) => (
-                    <option value={contest.id} key={index}>{contest.attributes.teamName} - {contest.attributes.contestName}</option>
+                    <option value={contest.id} key={index}>{contest.attributes.teamName}</option>
                 ))}
             </select>
             {targetContest != 0 && (

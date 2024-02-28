@@ -84,8 +84,6 @@ export interface Post extends Card {
 
 export interface ContestAttributes extends CardAttributes {
   teamName: string;
-  contestName: string;
-  requestBody: string;
   teamId: number;
 }
 

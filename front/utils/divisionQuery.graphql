@@ -1,7 +1,7 @@
 {
   sportMatches(
     first: 1
-    or: [{ awayOpponent_team_id: "11066" }, { homeOpponent_team_id: "11066" }]
+    or: [{ awayOpponent_team_id: "{{TEAM_ID}}" }, { homeOpponent_team_id: "{{TEAM_ID}}" }]
     order: [{ date: "DESC" }]
   ) {
     edges {

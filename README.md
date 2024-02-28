@@ -75,7 +75,7 @@ It's a NextJS front. Please refer to the [NextJS documentation](https://nextjs.o
 
 Utility functions are in the utils folders, reusable components in the components folder, pages in the app folder and external services in the services folder.
 
-Look at the [Strapi user documentation](https://docs.strapi.io/user-docs/intro) to make API calls to the backend. You can refer to the API schema definitions in JSON format /backend/src/api folder
+Look at the [Strapi user documentation](https://docs.strapi.io/user-docs/intro) to make API calls to the backend. You can refer to the API schema definitions in JSON format in the /back/src/api folder
 
 # Backend
 

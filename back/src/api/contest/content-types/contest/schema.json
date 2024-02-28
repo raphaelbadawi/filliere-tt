@@ -12,15 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "requestBody": {
-      "type": "text",
-      "required": true
-    },
     "teamName": {
-      "type": "string",
-      "required": true
-    },
-    "contestName": {
       "type": "string",
       "required": true
     },

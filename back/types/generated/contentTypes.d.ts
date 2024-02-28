@@ -859,9 +859,7 @@ export interface ApiContestContest extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    requestBody: Attribute.Text & Attribute.Required;
     teamName: Attribute.String & Attribute.Required;
-    contestName: Attribute.String & Attribute.Required;
     teamId: Attribute.Integer & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

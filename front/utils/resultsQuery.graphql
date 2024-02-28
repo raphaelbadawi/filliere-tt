@@ -1,5 +1,5 @@
 {
-  poolsWithSportMatches: pools(group_tour_division_id: 125496) {
+  poolsWithSportMatches: pools(group_tour_division_id: {{DIVISION_ID}}) {
     edges {
       node {
         id
@@ -70,7 +70,7 @@
       }
     }
   }
-  poolsWithResults: pools(group_tour_division_id: 125496) {
+  poolsWithResults: pools(group_tour_division_id: {{DIVISION_ID}}) {
     edges {
       node {
         id
