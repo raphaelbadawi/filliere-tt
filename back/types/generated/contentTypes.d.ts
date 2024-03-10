@@ -879,6 +879,36 @@ export interface ApiContestContest extends Schema.CollectionType {
   };
 }
 
+export interface ApiNewsletterNewsletter extends Schema.CollectionType {
+  collectionName: 'newsletters';
+  info: {
+    singularName: 'newsletter';
+    pluralName: 'newsletters';
+    displayName: 'Newsletter';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::newsletter.newsletter',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::newsletter.newsletter',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Schema.CollectionType {
   collectionName: 'posts';
   info: {
@@ -932,6 +962,37 @@ export interface ApiPracticalPractical extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::practical.practical',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubscriberSubscriber extends Schema.CollectionType {
+  collectionName: 'subscribers';
+  info: {
+    singularName: 'subscriber';
+    pluralName: 'subscribers';
+    displayName: 'Subscriber';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.Email;
+    hash: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::subscriber.subscriber',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::subscriber.subscriber',
       'oneToOne',
       'admin::user'
     > &
@@ -1043,8 +1104,10 @@ declare module '@strapi/types' {
       'api::card.card': ApiCardCard;
       'api::comment.comment': ApiCommentComment;
       'api::contest.contest': ApiContestContest;
+      'api::newsletter.newsletter': ApiNewsletterNewsletter;
       'api::post.post': ApiPostPost;
       'api::practical.practical': ApiPracticalPractical;
+      'api::subscriber.subscriber': ApiSubscriberSubscriber;
       'api::subscription.subscription': ApiSubscriptionSubscription;
       'api::tag.tag': ApiTagTag;
       'api::title.title': ApiTitleTitle;

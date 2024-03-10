@@ -6,7 +6,7 @@ Little website for a tennis table club.
 
 You need to fill the user and password values in the .env files in the backend folder. Fill them as it pleases you.
 
-Regarding the app tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid.
+Regarding the app tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid. Moreover, the ADMIN_JWT_TOKEN value of Strapi .env file must be replicated as the STRAPI_ADMIN_JWT of NextJS .env file.
 
 It is possible to modify those values afterwards, but please note that if you change the token values, all existing API tokens will be invalidated and you will need to generate new ones using the Strapi admin UI.
 

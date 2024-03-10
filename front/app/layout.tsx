@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-/** @todo footer and newsletter */
+/** @todo send newsletter, make newsletter layout (mjml) and inject content inside it before send, make website footer, subscribe will be done from a footer link with a simple form in a modal (nextui modal), unsubscribe with a hash-protected link found in the footer of every newsletter */
 export default function RootLayout({
   children,
 }: {
