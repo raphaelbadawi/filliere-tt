@@ -149,3 +149,12 @@ export interface SearchParams {
   page?: number;
   tagId?: number;
 }
+
+
+export interface Subscriber {
+  id: number,
+  attributes: {
+    email: string,
+    hash: string,
+  }
+}

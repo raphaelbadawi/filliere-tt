@@ -1,0 +1,48 @@
+<mjml>
+  <mj-head>
+    <mj-style>
+      .header {
+        background: rgb(137, 162, 202);
+      }
+
+      .footer {
+        background-color: #f0f0f0;
+      }
+
+      .unsubscribe-button {
+        background-color: rgb(210, 39, 25);
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+    </mj-style>
+    <mj-font name="Poppins" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
+  </mj-head>
+  <mj-body>
+    <!-- Header -->
+    <mj-section padding="0">
+      <mj-column>
+        <mj-text align="center" color="#FFFFFF" font-family="Poppins, Arial" font-size="24px" css-class="header"><img width="28px" alt="Logo" src="{{LOGO_LINK}}">{{TITLE}}</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Content -->
+    <mj-section background-color="#ffffff">
+      <mj-column>
+        <mj-text font-family="Poppins, Arial">
+          {{CONTENT}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section padding="0" background-color="#ffffff">
+      <mj-column>
+        <mj-text align="center" font-family="Poppins, Arial" css-class="footer">
+          <p>Pour vous désinscrire, vous pouvez cliquer sur le bouton ci-dessous : </p>
+          <mj-button class="unsubscribe-button"><a href="{{UNSUBSCRIBE_LINK}}" style="text-decoration: none; color: #ffffff;">Me désinscrire</a></mj-button>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

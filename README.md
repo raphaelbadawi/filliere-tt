@@ -1,4 +1,4 @@
-Little website for a tennis table club.
+Little website for a table tennis club.
 
 # Prod
 
@@ -43,7 +43,7 @@ npm run strapi import -- -f ./config.tar  # WARNING: this will erase any previou
 exit
 ```
 
-You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
+You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration. Last but not least: make sure the NEXT_PUBLIC_HOST variable in your production .env matches your production host.
 
 ## Update packages
 

@@ -13,7 +13,7 @@ export default async function sendMail(from: string, to: string, subject: string
         from,
         to,
         subject,
-        text,
+        html: text,
     };
     try {
         await transporter.sendMail(mailData);
