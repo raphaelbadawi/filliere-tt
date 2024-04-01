@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import TopBar from '@/components/TopBar';
 import { ReactNode } from 'react';
 import Script from 'next/script';
+import Footer from '@/components/Footer';
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   },
 }
 
-/** @todo make website footer, subscribe will be done from a footer link with a simple form in a modal (nextui modal), unsubscribe with a hash-protected link found in the footer of every newsletter */
+/** @todo subscribe modal with swal, subscribe and unsubcribe apis (using subscriber hash) */
 export default function RootLayout({
   children,
 }: {
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className={`h-screen flex flex-col bg-background ${poppins.className}`}>
         <TopBar links={navLinks} />
         <main className="mt-16 grow grid place-items-start">{children}</main>
+        <Footer />
         <Script src="/scripts/cursorAura.js" strategy="lazyOnload"></Script>
       </body>
     </html>

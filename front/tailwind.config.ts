@@ -16,6 +16,9 @@ const config: Config = {
         background: "rgb(var(--background-rgb))",
         backlight: "rgb(var(--background-light-rgb))",
       },
+      boxShadow: {
+        'reverse': '0 -10px 15px 3px rgba(var(--accent-rgb), 0.3)',
+      },
       maxWidth: {
         "1/2": "50%",
       },

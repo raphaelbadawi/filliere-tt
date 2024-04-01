@@ -32,7 +32,7 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[1]} />
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[2]} />
             </button>
-            <ul className={`absolute pt-16 flex flex-col justify-start p-4 gap-4 rounded-br-xl rounded- bg-background shadow-primary ${open ? "translate-x-0 shadow-xl" : "-translate-x-full shadow-nonz"} transition-all duration-300`}>
+            <ul className={`absolute pt-16 flex flex-col justify-start p-4 gap-4 rounded-br-xl bg-background shadow-primary ${open ? "translate-x-0 shadow-xl" : "-translate-x-full shadow-none"} transition-all duration-300`}>
                 {links && links.map((link, index) =>
                     <li
                         key={index}
