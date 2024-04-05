@@ -6,8 +6,8 @@ import { promises as fs } from 'fs';
 import { Subscriber } from "@/types";
 
 function setMailTemplateContent(template: string, subscriber: Subscriber, title: string, content: string) {
-  const logoLink = process.env.NEXT_PUBLIC_HOST + "/icons/logo.png ";
-  const unsubscribeLink = process.env.NEXT_PUBLIC_HOST + "/api/unsubscribe ";
+  const logoLink = process.env.NEXT_PUBLIC_HOST + "/icons/logo.png";
+  const unsubscribeLink = process.env.NEXT_PUBLIC_HOST + "/api/unsubscribe";
 
   let templateContent = template
     .replace("{{LOGO_LINK}}", logoLink)

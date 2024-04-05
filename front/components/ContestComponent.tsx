@@ -7,7 +7,7 @@ import ContestResults from "./ContestResults";
 
 export default function ContestComponent({ contest }: { contest: Contest }) {
     const [results, setResults] = useState({ contestName: null, ladder: null, results: null });
-    // trigger a getResults request and update state accordingly
+    // Trigger a getResults request and update state accordingly
     useEffect(() => {
         setResults({ contestName: null, ladder: null, results: null });
         getResults(contest.attributes.teamId).then(data => setResults(data));

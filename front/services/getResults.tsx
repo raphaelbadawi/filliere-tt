@@ -164,7 +164,7 @@ export default async function getResults(teamId: number) {
     }
     const rawResults = await res.json();
 
-    // loop into each pool ladder to find in which pool the team is
+    // Loop into each pool ladder to find in which pool the team is
     let poolIndex = 0;
     let poolsWithResultsKey = "poolsWithResults";
     let poolsWithSportMatchesKey = "poolsWithSportMatches";
@@ -183,7 +183,7 @@ export default async function getResults(teamId: number) {
         }
     }
 
-    // using the pool index, get all results
+    // Using the pool index, get all results
     const poolNumber = poolIndex + 1;
     const ladder = rawResults.data[poolsWithResultsKey].edges[poolIndex].node.results.edges;
     const results = rawResults.data[poolsWithSportMatchesKey].edges[poolIndex].node.sportMatches.edges;

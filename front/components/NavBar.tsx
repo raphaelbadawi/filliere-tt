@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import DarkModeSwitch from "./DarkModeSwitch";
 
@@ -41,12 +41,15 @@ export default function NavBar({ links }: { links: { href: string, title: string
         setUnderlineStyle(computeUnderlineStyle(activeIndex));
     };
 
+    // We have to cache this callback so it doesn't create a recalculation loop with useEffect
+    const cachedComputedActiveIndex = useCallback(computeActiveIndex, [links, pathname]);
+
     useEffect(() => {
-        const activeIndex = computeActiveIndex();
+        const activeIndex = cachedComputedActiveIndex();
         setActiveIndex(activeIndex);
         const underlineStyle = computeUnderlineStyle(activeIndex);
         setUnderlineStyle(underlineStyle);
-    }, [pathname]);
+    }, [pathname, cachedComputedActiveIndex]);
 
     return (
         <nav className="hidden lg:flex relative w-full shadow-lg shadow-primary">

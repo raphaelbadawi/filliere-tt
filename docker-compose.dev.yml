@@ -1,13 +1,17 @@
 version: "3"
 services:
   filliere-tt:
-    command: dev
+    command:
+    - |
+       npm run dev
     volumes:
       - ./front:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/.next
   filliere-tt-strapi:
-    command: develop
+    command:
+    - |
+       npm run develop
     env_file:
       - ./back/.env.development.local
     volumes:

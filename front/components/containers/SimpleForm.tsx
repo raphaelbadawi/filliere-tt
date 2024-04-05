@@ -33,9 +33,10 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
         setIsVerified(true);
     }
 
-    let hasDarkMode = false;
+    // We use a ref so we don't lose the value after each render
+    let hasDarkMode = useRef(false);
     useEffect(() => {
-        hasDarkMode = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        hasDarkMode.current = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
     }, [])
 
     const clickHandler: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -111,7 +112,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY || ""}
                         onChange={onReCAPTCHAChange}
                     />
-                    <ToastContainer theme={hasDarkMode ? "dark" : "light"} />
+                    <ToastContainer theme={hasDarkMode.current ? "dark" : "light"} />
                     <label className="block text-gray-700 text-xs" htmlFor="contentButton">
                         {submitNotice}
                     </label>

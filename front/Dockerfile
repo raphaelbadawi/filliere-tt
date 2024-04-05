@@ -10,4 +10,5 @@ COPY . /usr/src/app
 
 EXPOSE 3000
 
-ENTRYPOINT ["npm", "run"]
+ENV HOSTNAME "0.0.0.0"
+ENTRYPOINT ["/bin/sh", "-c"]

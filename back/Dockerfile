@@ -13,6 +13,4 @@ COPY . /usr/src/app
 RUN npm run build
 EXPOSE 1337
 
-USER node
-
-ENTRYPOINT ["npm", "run"]
+ENTRYPOINT ["/bin/sh", "-c"]

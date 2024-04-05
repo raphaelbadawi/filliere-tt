@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
 }
 
-/** @todo subscribe modal with swal, subscribe and unsubcribe apis (using subscriber hash) */
+/** @todo subscribe and unsubcribe apis (using subscriber hash) */
 export default function RootLayout({
   children,
 }: {

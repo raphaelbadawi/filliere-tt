@@ -6,17 +6,19 @@ Little website for a table tennis club.
 
 You need to fill the user and password values in the .env files in the backend folder. Fill them as it pleases you.
 
-Regarding the app tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest my-project` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid. Moreover, the ADMIN_JWT_TOKEN value of Strapi .env file must be replicated as the STRAPI_ADMIN_JWT of NextJS .env file.
+Regarding the app tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest dummy` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid. Moreover, the ADMIN_JWT_TOKEN value of Strapi .env file must be replicated as the STRAPI_ADMIN_JWT of NextJS .env file.
 
 It is possible to modify those values afterwards, but please note that if you change the token values, all existing API tokens will be invalidated and you will need to generate new ones using the Strapi admin UI.
+
+Last but not least: you must use your own Google ReCAPTCHA key to fill NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY.
 
 ## Run
 
 ### Dev
 
-`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+`docker compose -f docker-compose.yml -f docker-compose.dev.yml up`
 
-If changes are made to the configuration (e.g. backoffice layout and labels, users roles) and you need to export the configuration again:
+If changes are made to the configuration (e.g. backoffice layout and labels, users roles), you must export the configuration again:
 ```bash
 docker ps # spot your running strapi container name
 docker exec -it <container_name> /bin/sh
@@ -32,9 +34,9 @@ You will need to generate an API token in Strapi configuration and fill it in th
 
 First set a nginx reverse proxy to proxy HTTPS to HTTP 3000 and HTTPS 1337 to HTTP 1337.
 
-Then you can run `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`
+Then you can run `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
 
-If you need to restore the configuration:
+If this is the first deployment, restore the configuration:
 ```bash
 docker ps # spot your running strapi container name
 docker exec -it <container_name> /bin/sh
@@ -43,22 +45,28 @@ npm run strapi import -- -f ./config.tar  # WARNING: this will erase any previou
 exit
 ```
 
-You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration. Last but not least: make sure the NEXT_PUBLIC_HOST variable in your production .env matches your production host.
+You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
+
+Make sure the NEXT_PUBLIC_HOST variable in your production .env matches your production host.
+
+Please note that most of the navigation will fail until all single entities have had their values filled on Strapi.
+
+Last but not least: authorize the domain name to your Google ReCAPTCHA key.
 
 ## Update packages
 
-Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker-compose command to rebuild the image.
+Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker compose command to rebuild the image.
 
 ### Update without downtime
 
 Use docker swarm: `docker swarm init`. Follow the instructions returned by the swarm init command if you want to add other hosts to the swarm.
 
-Then to run the service, instead of directly running docker-compose, you can run : `docker stack deploy -c docker-compose.yml -c  docker-compose.prod.yml filliere-tt`. Then after each update you can just run the same command again to update the images and have all the handing over between outdated and updated containers as well as the following cleanup being handled automatically.
+Then to run the service, instead of directly running docker compose, you can run : `docker stack deploy -c docker-compose.yml -c  docker-compose.prod.yml filliere-tt`. Then after each update you can just run the same command again to update the images and have all the handing over between outdated and updated containers as well as the following cleanup being handled automatically.
 
 With swarm, you can add healtchecks on your compose files. For example, for Strapi, you could use:
 ```yml
     healthcheck:
-      test: curl --fail http://localhost:1337 || exit 1
+      test: curl --fail http://0.0.0.0:1337 || exit 1
       interval: 60s
       retries: 5
       start_period: 20s
