@@ -150,7 +150,6 @@ export interface SearchParams {
   tagId?: number;
 }
 
-
 export interface Subscriber {
   id: number,
   attributes: {
