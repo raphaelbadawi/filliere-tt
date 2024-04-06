@@ -12,8 +12,9 @@ export default async function unsubscribe(hash: string) {
   const currentEntryData = await currentEntryResponse.json();
 
   if (!currentEntryData.data.length) {
-    return "Cette adresse mail est déjà désinscrite de la newsletter";
+    return "Cette adresse email est déjà désinscrite de la newsletter";
   }
+  // If hashes don't match, the request doesn't come from a legit link
   if (currentEntryData.data[0].attributes.hash != hash) {
     return "Le lien n'est pas valide";
   }

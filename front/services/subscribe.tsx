@@ -26,7 +26,7 @@ export default async function subscribe(email: string) {
       body: JSON.stringify({data: { email, hash }}),
     }
   );
-  console.log(res);
+
   if (!res.ok) {
     return "KO";
   }
