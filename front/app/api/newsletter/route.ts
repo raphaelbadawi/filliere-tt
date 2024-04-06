@@ -4,15 +4,17 @@ import getMultiple from "@/services/getMultiple";
 import sendMail from "@/services/sendMail";
 import { promises as fs } from 'fs';
 import { Subscriber } from "@/types";
+import parseMarkdown from "@/utils/parseMarkdown";
 
-function setMailTemplateContent(template: string, subscriber: Subscriber, title: string, content: string) {
+async function setMailTemplateContent(template: string, subscriber: Subscriber, title: string, content: string) {
   const logoLink = process.env.NEXT_PUBLIC_HOST + "/icons/logo.png";
   const unsubscribeLink = process.env.NEXT_PUBLIC_HOST + "/api/unsubscribe?hash=" + subscriber.attributes.hash;
+  const contentHtml = await parseMarkdown(content);
 
   let templateContent = template
     .replace("{{LOGO_LINK}}", logoLink)
     .replace("{{TITLE}}", title)
-    .replace("{{CONTENT}}", content)
+    .replace("{{CONTENT}}", contentHtml)
     .replace("{{UNSUBSCRIBE_LINK}}", unsubscribeLink)
 ;
   return templateContent;
