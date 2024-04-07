@@ -15,8 +15,8 @@ async function setMailTemplateContent(template: string, subscriber: Subscriber, 
     .replace("{{LOGO_LINK}}", logoLink)
     .replace("{{TITLE}}", title)
     .replace("{{CONTENT}}", contentHtml)
-    .replace("{{UNSUBSCRIBE_LINK}}", unsubscribeLink)
-;
+    .replace("{{UNSUBSCRIBE_LINK}}", unsubscribeLink);
+
   return templateContent;
 }
 
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   const template = await getTemplate();
   for (const subscriber of subscribers.data) {
     const title = `[FILLIÈRE TT] Newsletter du ${date}`;
-    const content = setMailTemplateContent(template, subscriber, title, body.content);
+    const content = await setMailTemplateContent(template, subscriber, title, body.content);
     sendMail(
       process.env.MAIL_USER || "",
       subscriber.attributes.email,

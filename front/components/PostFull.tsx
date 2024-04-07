@@ -19,7 +19,7 @@ export default async function PostFull({post}: {post: Post}) {
                 <span className="text-gray-300">par {post.attributes.createdBy.data.attributes.firstname} {post.attributes.createdBy.data.attributes.lastname}</span>
                 <hr className="mt-3 border-white border-t-4 rounded-full"></hr>
                 {post.attributes.picture.data && <Image width="320" height="320" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${post.attributes.picture.data.attributes.formats.small.url}`} alt="Image" className="object-cover h-80 w-80 mt-2 rounded"></Image>}
-                <p dangerouslySetInnerHTML={{ __html: contentHtml }} className="mt-3 text-white"></p>
+                <div dangerouslySetInnerHTML={{ __html: contentHtml }} className="mt-3 min-w-full text-white prose prose-invert"></div>
             </article>
         </div>
     )
