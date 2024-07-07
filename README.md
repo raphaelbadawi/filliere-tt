@@ -10,7 +10,7 @@ Regarding the app tokens, you can generate a dummy Strapi application with `npx 
 
 It is possible to modify those values afterwards, but please note that if you change the token values, all existing API tokens will be invalidated and you will need to generate new ones using the Strapi admin UI.
 
-Last but not least: you must use your own Google ReCAPTCHA key to fill NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY.
+Last but not least: you must use your own Google ReCAPTCHA key to fill NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY in the NextJS .env file.
 
 ## Run
 
@@ -32,7 +32,7 @@ You will need to generate an API token in Strapi configuration and fill it in th
 
 ### Prod
 
-First set a nginx reverse proxy to proxy HTTPS to HTTP 3000 and HTTPS 1337 to HTTP 1337.
+First set a nginx reverse proxy to proxy HTTPS to HTTP 3000 and HTTPS 1337 to HTTP 1337. Don't forget to redirect HTTP to HTTPS.
 
 Then you can run `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
 
@@ -47,7 +47,7 @@ exit
 
 You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
 
-Make sure the NEXT_PUBLIC_HOST variable in your production .env matches your production host.
+Make sure the NEXT_PUBLIC_HOST variable in your production NextJS .env matches your production host.
 
 Please note that most of the navigation will fail until all single entities have had their values filled on Strapi.
 

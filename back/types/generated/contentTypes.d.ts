@@ -803,7 +803,8 @@ export interface ApiCardCard extends Schema.CollectionType {
     title: Attribute.String & Attribute.Required;
     caption: Attribute.Text & Attribute.Required;
     content: Attribute.RichText & Attribute.Required;
-    picture: Attribute.Media & Attribute.Required;
+    picture: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -928,7 +929,7 @@ export interface ApiPostPost extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    picture: Attribute.Media;
+    picture: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     content: Attribute.RichText & Attribute.Required;
     slug: Attribute.UID<'api::post.post', 'title'> & Attribute.Required;
     comments: Attribute.Relation<
@@ -1017,7 +1018,8 @@ export interface ApiSubscriptionSubscription extends Schema.SingleType {
   };
   attributes: {
     content: Attribute.RichText & Attribute.Required;
-    file: Attribute.Media & Attribute.Required;
+    file: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
