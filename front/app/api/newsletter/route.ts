@@ -36,9 +36,10 @@ export async function POST(req: Request) {
   const template = await getTemplate();
   for (const subscriber of subscribers.data) {
     const title = `[FILLIÈRE TT] Newsletter du ${date}`;
+    const sender = `Fillière TT <${process.env.MAIL_USER}>`;
     const content = await setMailTemplateContent(template, subscriber, title, body.content);
     sendMail(
-      process.env.MAIL_USER || "",
+      sender || "",
       subscriber.attributes.email,
       title,
       content
