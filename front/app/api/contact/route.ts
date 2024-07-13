@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const sender = `${body.author} <${body.email}>`;
   return sendMail(
     sender || "",
-    process.env.MAIL_USER || "",
+    process.env.MAIL_POSTMASTER || "",
     `[FILLIÈRE TT] Message de ${body.author}`,
     body.content
   );
