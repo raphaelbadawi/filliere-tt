@@ -1,20 +1,18 @@
 Little website for a table tennis club.
 
-# Prod
+# Configuration
 
-## Configuration
-
-You need to fill the user and password values in the .env files in the backend folder. Fill them as it pleases you.
+You need to fill the DB user and password values in the .env files in the backend folder. Fill them as it pleases you.
 
 Regarding the app tokens, you can generate a dummy Strapi application with `npx create-strapi-app@latest dummy` and then reuse the token values of this dummy application: you'll be sure they are intrinsincally valid. Moreover, the ADMIN_JWT_TOKEN value of Strapi .env file must be replicated as the STRAPI_ADMIN_JWT of NextJS .env file.
 
 It is possible to modify those values afterwards, but please note that if you change the token values, all existing API tokens will be invalidated and you will need to generate new ones using the Strapi admin UI.
 
-Last but not least: you must use your own Google ReCAPTCHA key to fill NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY in the NextJS .env file.
+Don't forget to fill your postmaster credentials for mailing to work (and to open the matching SMTP port in your firewall). You must also use your own Google ReCAPTCHA key to fill NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY in the NextJS .env file.
 
 ## Run
 
-### Dev
+### Development
 
 `docker compose -f docker-compose.yml -f docker-compose.dev.yml up`
 
@@ -28,13 +26,15 @@ mv -f export_* config.tar
 exit
 ```
 
-You will need to generate an API token in Strapi configuration and fill it in the .env.development.local file in the ./front folder. In a dev environment, you can use a full access token.
+Finally, you will need to generate an API token in Strapi configuration and fill it in the .env.development.local file in the ./front folder. In a dev environment, you can use a full access token.
 
-### Prod
+### Production
 
-Take example on the nginx.ping.conf example in the ./prod folder.
+For the web server configuration, take example on the nginx.ping.conf example in the ./prod folder.
 
-Then you can run `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
+Make sure the NEXT_PUBLIC_HOST variable in your production NextJS .env matches your production host.
+
+Then you can run `docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
 
 If this is the first deployment, restore the configuration:
 ```bash
@@ -45,26 +45,24 @@ npm run strapi import -- -f ./config.tar  # WARNING: this will erase any previou
 exit
 ```
 
-You will need to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
-
-Make sure the NEXT_PUBLIC_HOST variable in your production NextJS .env matches your production host.
+Your frontend needs to be able to communicate with your backend. Now that your services are up, you will be able to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
 
 Please note that most of the navigation will fail until all single entities have had their values filled on Strapi.
 
-Last but not least: authorize the domain name to your Google ReCAPTCHA key.
+Finally, authorize the domain name to your Google ReCAPTCHA key.
 
-### Backup
+## Backup
 
-#### Backup DB volume
+### Backup DB volume
 
 `docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/
 data/ -v $(pwd):/backup postgres:12.0-alpine tar -czvf /backup/backup.tar.gz /var/lib/postgresql/data`
 
-#### Restore DB volume
+### Restore DB volume
 
 `docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:12.0-alpine sh -c "rm -rf /var/lib/postgresql/data/* && tar -xzvf /backup/backup.tar.gz -C /var/lib/postgresql/data/"`
 
-## Update packages
+## Update
 
 Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker compose command to rebuild the image.
 
@@ -86,17 +84,17 @@ With swarm, you can add healtchecks on your compose files. For example, for Stra
 
 You can also automate the deployment by setting up git jobs on events like push tags * to copy an updated code base to the host and to run shell commands as well.
 
-# Dev
+# Development
 
-# Frontend
+## Frontend
 
 It's a NextJS front. Please refer to the [NextJS documentation](https://nextjs.org/docs).
 
 Utility functions are in the utils folders, reusable components in the components folder, pages in the app folder and external services in the services folder.
 
-Look at the [Strapi user documentation](https://docs.strapi.io/user-docs/intro) to make API calls to the backend. You can refer to the API schema definitions in JSON format in the /back/src/api folder
+Look at the [Strapi user documentation](https://docs.strapi.io/user-docs/intro) to make API calls to the backend. You can refer to the API schema definitions in JSON format in the ./back/src/api folder
 
-# Backend
+## Backend
 
 It's a Strapi backend. It has not been tweaked (yet) and is versioned mainly for the automigration of schemas.
 
