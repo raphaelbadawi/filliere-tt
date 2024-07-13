@@ -8,7 +8,7 @@ export default async function Home() {
   const { data: cards } : { data: Card[] } = await getMultiple();
   const { data: titleObject } = await getSingle();
   return (
-    <section id="home" className="w-full">
+    <section id="home" className="w-full mb-20">
       <Title text={titleObject.attributes.title} />
       <div className="px-4 flex flex-wrap gap-4 items-start">
         {cards && cards.map((card, index) =>

@@ -14,6 +14,8 @@ services:
       - "1337:1337"
     depends_on:
       - filliere-tt-strapi-db
+    volumes:
+      - ./public/uploads:/usr/src/app/public/uploads #using a volume
   filliere-tt-strapi-db:
     platform: linux/amd64 #for platform error on Apple M1 chips
     restart: unless-stopped

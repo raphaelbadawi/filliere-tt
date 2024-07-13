@@ -18,6 +18,7 @@ export default async function sendMail(from: string, to: string, subject: string
     try {
         await transporter.sendMail(mailData);
     } catch (e) {
+        console.log(e);
         return new Response("KO", { status: 500 });
     }
     return new Response("OK", { status: 200 });
