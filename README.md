@@ -32,7 +32,7 @@ You will need to generate an API token in Strapi configuration and fill it in th
 
 ### Prod
 
-First set a nginx reverse proxy to proxy HTTPS to HTTP 3000 and HTTPS 1337 to HTTP 1337. Don't forget to redirect HTTP to HTTPS.
+Take example on the nginx.ping.conf example in the ./prod folder.
 
 Then you can run `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
 

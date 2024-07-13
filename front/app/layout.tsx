@@ -1,6 +1,6 @@
 import './globals.css'
 import { Poppins } from "next/font/google"
-import { FaNewspaper, FaLightbulb, FaRightToBracket, FaEnvelope, FaTrophy } from "react-icons/fa6";
+import { FaNewspaper, FaLightbulb, FaRightToBracket, FaEnvelope, FaTrophy, FaArchway } from "react-icons/fa6";
 import type { Metadata } from 'next'
 import TopBar from '@/components/TopBar';
 import { ReactNode } from 'react';
@@ -15,6 +15,7 @@ const navLinks: { href: string, title: string, icon: ReactNode }[] = [
   { href: "/subscribe", title: "S'inscrire", icon: <FaRightToBracket /> },
   { href: "/contact", title: "Contact", icon: <FaEnvelope /> },
   { href: "/contest", title: "Compétitions", icon: <FaTrophy /> },
+  { href: process.env.ARCHIVES_URL || "/", title: "Archives", icon: <FaArchway />}
 ];
 
 export const metadata: Metadata = {
