@@ -45,7 +45,7 @@ npm run strapi import -- -f ./config.tar  # WARNING: this will erase any previou
 exit
 ```
 
-Your frontend needs to be able to communicate with your backend. Now that your services are up, you will be able to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration.
+Your frontend needs to be able to communicate with your backend. Now that your services are up, you will be able to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration. It is recommanded to create editors and authors rather than doing everything from the admin account.
 
 Please note that most of the navigation will fail until all single entities have had their values filled on Strapi.
 
