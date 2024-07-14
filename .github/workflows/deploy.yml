@@ -1,0 +1,36 @@
+name: Deploy on push to main
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y openssh-client expect
+
+    - name: Add SSH key
+      id: add_ssh_key
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/ssh_key
+        chmod 600 /tmp/ssh_key
+
+    - name: Run commands on remote server
+      run: |
+        expect <<- DONE
+        spawn ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key ${{ secrets.SSH_SERVER }}
+        expect "Enter passphrase for key '/tmp/ssh_key':"
+        send "${{ secrets.SSH_PASSPHRASE }}\r"
+        expect "$ "
+        send "echo \"Miaou\""
+        expect "$ "
+        send "exit\r"
+        expect eof
+        DONE
