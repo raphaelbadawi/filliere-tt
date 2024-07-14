@@ -30,7 +30,7 @@ Finally, you will need to generate an API token in Strapi configuration and fill
 
 ### Production
 
-For the web server configuration, take example on the nginx.ping.conf example in the ./prod folder.
+For the web server configuration, take example on the nginx.ping.conf example in the ./prod folder. It is recommended for things to work out of the box (including CI, nginx configuration and cleanup script) to clone the git repo in `/var` so it sits in `/var/filliere-tt`.
 
 Make sure the NEXT_PUBLIC_HOST variable in your production NextJS .env matches your production host.
 
@@ -68,11 +68,9 @@ You may also backup the ./back/public/uploads folder.
 
 You can add this :
 
-`0 0 * * * docker system prune -a -f --volumes`
+`0 0 * * * /var/filliere-tt/prod/docker_cleanup.sh`
 
 to /etc/crontab to remove all Docker leftover unused data (which can build up very quickly).
-
-But in this case, never push around midnight (UTC): if `docker compose` is down because of an ongoing deployment, the volumes would be deleted!
 
 ## Update
 
