@@ -45,7 +45,7 @@ npm run strapi import -- -f ./config.tar  # WARNING: this will erase any previou
 exit
 ```
 
-Your frontend needs to be able to communicate with your backend. Now that your services are up, you will be able to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration. It is recommanded to create editors and authors rather than doing everything from the admin account.
+Your frontend needs to be able to communicate with your backend. Now that your services are up, you will be able to generate an API token in Strapi configuration and fill it in the .env.production.local file in the ./front folder. Minimal permissions for the token are read cards, read contests, read posts, read tags, read title, read practical, read subscription, read and write comments. You may also need to set the default locale in Strapi configuration. It is recommended to create editors and authors rather than doing everything from the admin account.
 
 Please note that most of the navigation will fail until all single entities have had their values filled on Strapi.
 
@@ -74,7 +74,7 @@ to /etc/crontab to remove all Docker leftover unused data (which can build up ve
 
 ## Update
 
-Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker compose command to rebuild the image.
+Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the containers and the images (not the volumes) and then rebuild the images (see ./.github/workflows/deploy.yml).
 
 ### Update without downtime
 
