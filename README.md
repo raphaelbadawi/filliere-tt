@@ -64,6 +64,16 @@ You may also backup the ./back/public/uploads folder.
 
 `docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:12.0-alpine sh -c "rm -rf /var/lib/postgresql/data/* && tar -xzvf /backup/backup.tar.gz -C /var/lib/postgresql/data/"`
 
+#### Cleanup
+
+You can add this :
+
+`0 0 * * * docker system prune -a -f --volumes`
+
+to /etc/crontab to remove all Docker leftover unused data (which can build up very quickly).
+
+But in this case, never push around midnight (UTC): if `docker compose` is down because of an ongoing deployment, the volumes would be deleted!
+
 ## Update
 
 Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the container (just the container, not the volume). Then add the --build flag at the end of the next docker compose command to rebuild the image.

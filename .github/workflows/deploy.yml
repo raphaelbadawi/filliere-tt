@@ -3,7 +3,7 @@ name: Deploy on push to main
 on:
   push:
     branches:
-      - deploy
+      - main
 
 env:
   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -44,7 +44,12 @@ jobs:
           # Run SSH commands
           ssh -o StrictHostKeyChecking=no $SSH_SERVER << 'EOF'
             cd /var/filliere-tt
+            docker compose stop
+            git pull
             ls
-            # Add any other commands you need to run
+            docker rm filliere-tt-filliere-tt-1 filliere-tt-filliere-tt-strapi-1 
+            docker rmi filliere-tt-filliere-tt filliere-tt-filliere-tt-strapi
+            docker compose build --no-cache
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
             exit
           EOF
