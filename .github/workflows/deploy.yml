@@ -5,32 +5,34 @@ on:
     branches:
       - deploy
 
+env:
+  # Use the same ssh-agent socket value across all jobs
+  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y openssh-client expect
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y openssh-client expect
 
-    - name: Add SSH key
-      id: add_ssh_key
-      run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/ssh_key
-        chmod 600 /tmp/ssh_key
+      - name: Add SSH key
+        id: add_ssh_key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/ssh_key
+          chmod 600 /tmp/ssh_key
 
-    - name: Run commands on remote server
-      run: |
-        expect <<- DONE
-        spawn ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key ${{ secrets.SSH_SERVER }}
-        expect "Enter passphrase for key '/tmp/ssh_key':"
-        send "${{ secrets.SSH_PASSPHRASE }}\r"
-        expect "$ "
-        send "echo \"Miaou\""
-        expect "$ "
-        send "exit\r"
-        expect eof
-        DONE
+      - name: Run commands on remote server
+        env:
+          SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+        run: |
+          "ssh-agent -a $SSH_AUTH_SOCK > /dev/null"          
+          echo "echo $SSH_PASSPHRASE" > ~/.ssh_askpass && chmod +x ~/.ssh_askpass
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | DISPLAY=None SSH_ASKPASS=~/.ssh_askpass ssh-add - > /dev/null
+          spawn ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_SERVER }}
+          cd /var/filliere-tt
