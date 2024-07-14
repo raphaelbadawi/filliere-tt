@@ -6,7 +6,6 @@ on:
       - deploy
 
 env:
-  # Use the same ssh-agent socket value across all jobs
   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
 jobs:
@@ -21,18 +20,30 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y openssh-client expect
 
       - name: Add SSH key
-        id: add_ssh_key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/ssh_key
+          echo "$SSH_PRIVATE_KEY" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
 
-      - name: Run commands on remote server
+      - name: Set up SSH agent and run commands
         env:
-          SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
+          SSH_SERVER: ${{ secrets.SSH_SERVER }}
         run: |
-          "ssh-agent -a $SSH_AUTH_SOCK > /dev/null"          
-          echo "echo $SSH_PASSPHRASE" > ~/.ssh_askpass && chmod +x ~/.ssh_askpass
-          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | DISPLAY=None SSH_ASKPASS=~/.ssh_askpass ssh-add - > /dev/null
-          spawn ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_SERVER }}
-          cd /var/filliere-tt
+          # Start the SSH agent
+          eval "$(ssh-agent -a $SSH_AUTH_SOCK)"
+
+          # Create the SSH_ASKPASS helper file
+          echo 'echo $SSH_PASSPHRASE' > ~/.ssh_askpass
+          chmod +x ~/.ssh_askpass
+
+          # Add the private key to the SSH agent
+          DISPLAY=:0 SSH_ASKPASS=~/.ssh_askpass ssh-add /tmp/ssh_key
+
+          # Run SSH commands
+          ssh -o StrictHostKeyChecking=no $SSH_SERVER << 'EOF'
+            cd /var/filliere-tt
+            # Add any other commands you need to run
+            exit
+          EOF
