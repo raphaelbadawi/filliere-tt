@@ -44,6 +44,7 @@ jobs:
           # Run SSH commands
           ssh -o StrictHostKeyChecking=no $SSH_SERVER << 'EOF'
             cd /var/filliere-tt
+            ls
             # Add any other commands you need to run
             exit
           EOF
