@@ -8,8 +8,8 @@
   --background-rgb: 232, 232, 232;
   --primary-rgb: 137, 162, 202;
   --accent-rgb: 210, 39, 25;
-  --dark-primary-rgb: calc(137 * 0.33), calc(162 * 0.33), calc(202 * 0.33);
-  --dark-accent-rgb: calc(210 * 0.33), calc(39 * 0.33), calc(25 * 0.33);
+  --dark-primary-rgb: calc(137 * 0.25), calc(162 * 0.25), calc(202 * 0.25);
+  --dark-accent-rgb: calc(210 * 0.25), calc(39 * 0.25), calc(25 * 0.25);
 }
 
 :root.dark {
@@ -49,4 +49,9 @@ body {
 .cursor-aura-receptor {
   position: relative;
   overflow: hidden;
+}
+
+.prose {
+  --tw-prose-bullets: var(--tw-prose-body) !important;
+  --tw-prose-hr: var(--tw-prose-body) !important;
 }

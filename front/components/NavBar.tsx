@@ -6,7 +6,7 @@ import { ReactNode, useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import DarkModeSwitch from "./DarkModeSwitch";
 
-export default function NavBar({ links }: { links: { href: string, title: string, icon: ReactNode }[] }) {
+export default function NavBar({ links }: { links: { href: string, title: string, icon: ReactNode, blank?: boolean }[] }) {
     const pathname = usePathname();
     const [underlineStyle, setUnderlineStyle] = useState({ width: "0px", offset: "0px" });
     const [activeIndex, setActiveIndex] = useState(0);
@@ -52,7 +52,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
     }, [pathname, cachedComputedActiveIndex]);
 
     return (
-        <nav className="hidden lg:flex relative w-full shadow-lg shadow-primary">
+        <nav className="hidden xl:flex relative w-full shadow-lg shadow-primary">
             <Link className="absolute m-2 hover:scale-125 transition-transform duration-300" href="/"><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
             <ul className="relative left-1/2 -translate-x-1/2 flex p-4 gap-4 justify-center" onMouseLeave={handleMouseLeave}
             >
@@ -65,6 +65,7 @@ export default function NavBar({ links }: { links: { href: string, title: string
                         <Link
                             className={`flex items-center gap-1 nav-link text-xl font-semibold transition-colors duration-300 ease-in-out ${pathname.startsWith(link.href) ? "text-accent" : "text-secondary"}`}
                             href={{ pathname: link.href }}
+                            {...(link.blank ? { target: "_blank" } : {})}      
                         >
                             <span className="icon">{link.icon}</span>
                             {link.title}

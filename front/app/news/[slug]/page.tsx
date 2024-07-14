@@ -7,7 +7,7 @@ export default async function SingleNews({ params }: { params: { slug: string } 
     let filters = "&filters[slug][$eq]=" + params.slug;
     const { data: post } = await getPosts(1, 1, filters);
     return (
-        <div className="w-full flex flex-col">
+        <div className="w-screen flex flex-col">
             <section id="singleNews" className="w-full p-4">
                 <PostFull post={post[0]} />
             </section>

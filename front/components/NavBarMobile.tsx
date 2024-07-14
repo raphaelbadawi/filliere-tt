@@ -6,7 +6,7 @@ import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
 import DarkModeSwitch from "./DarkModeSwitch";
 
-export default function NavBarMobile({ links }: { links: { href: string, title: string, icon: ReactNode }[] }) {
+export default function NavBarMobile({ links }: { links: { href: string, title: string, icon: ReactNode, blank?: boolean }[] }) {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const burgerStyles = [
@@ -25,7 +25,7 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
     ]
 
     return (
-        <nav className="flex lg:hidden relative left-0 gap-2">
+        <nav className="flex xl:hidden relative left-0 gap-2">
             <Link className="z-20 m-2" href="/" onClick={() => setOpen(false)}><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
             <button className="z-20 nav-burger rounded-md" onClick={() => setOpen(!open)}>
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[0]} />
@@ -42,6 +42,7 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
                         <Link
                             className={`flex items-center gap-4 nav-link text-xl font-semibold uppercase transition-colors duration-300 ease-in-out ${pathname.startsWith(link.href) ? "text-accent" : "text-foreground"}`}
                             href={{ pathname: link.href }}
+                            {...(link.blank ? { target: "_blank" } : {})}
                         >
                             <span className="icon">{link.icon}</span>
                             {link.title}

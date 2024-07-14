@@ -9,24 +9,23 @@ import Footer from '@/components/Footer';
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
-const navLinks: { href: string, title: string, icon: ReactNode }[] = [
+const navLinks: { href: string, title: string, icon: ReactNode, blank?: boolean }[] = [
   { href: "/news", title: "Actualités du club", icon: <FaNewspaper /> },
   { href: "/practical", title: "Informations pratiques", icon: <FaLightbulb /> },
   { href: "/subscribe", title: "S'inscrire", icon: <FaRightToBracket /> },
   { href: "/contact", title: "Contact", icon: <FaEnvelope /> },
   { href: "/contest", title: "Compétitions", icon: <FaTrophy /> },
-  { href: process.env.ARCHIVES_URL || "/", title: "Archives", icon: <FaArchway />}
+  { href: process.env.ARCHIVES_URL || "/", title: "Archives", icon: <FaArchway />, blank: true}
 ];
 
 export const metadata: Metadata = {
   title: 'Fillière TT',
-  description: 'Page du club de tennis de table de Groisy',
+  description: 'Site du club de tennis de table de Groisy',
   icons: {
     icon: '/icon.png',
   },
 }
 
-/** @todo subscribe and unsubcribe apis (using subscriber hash) */
 export default function RootLayout({
   children,
 }: {
@@ -34,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html className="opacity-0 transition-opacity" lang="en">
-      <body className={`h-screen flex flex-col bg-background ${poppins.className}`}>
+      <body className={`min-h-screen min-w-screen w-max flex flex-col bg-background ${poppins.className}`}>
         <TopBar links={navLinks} />
         <main className="mt-16 grow grid place-items-start">{children}</main>
         <Footer />

@@ -72,7 +72,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
             <hr className="border-white border-t-4 rounded-full"></hr>
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="flex flex-wrap gap-2 w-full">
-                    <div className="flex flex-col flex-grow">
+                    <div className="flex flex-col flex-grow max-w-full">
                         <label className="block text-gray-700 text-sm font-bold" htmlFor="usernameInput">
                             Mon nom
                         </label>
@@ -81,7 +81,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                             <p className="text-red-500">{errors.fieldErrors["username"]}</p>
                         )}
                     </div>
-                    <div className="flex flex-col flex-grow">
+                    <div className="flex flex-col flex-grow max-w-full">
                         <label className="block text-gray-700 text-sm font-bold" htmlFor="emailInput">
                             Mon email
                         </label>

@@ -1,7 +1,7 @@
 import { Comment } from "@/types";
 import Date from "@/components/Date";
 
-export default function Comment({comment}: {comment: Comment}) {
+export default function CommentComponent({comment}: {comment: Comment}) {
     return (
         <div role="comment" className="p-4 bg-white text-black rounded">
             <p className="text-base">{comment.attributes.content}</p>

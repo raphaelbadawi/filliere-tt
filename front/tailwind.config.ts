@@ -24,6 +24,9 @@ const config: Config = {
       maxWidth: {
         "1/2": "50%",
       },
+      minWidth: {
+        "screen": "100vw",
+      },
       animation: {
         typewriter: "typewriter 2s steps(var(--text-length)) forwards",
         caret:

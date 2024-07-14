@@ -13,12 +13,12 @@ export default function ContestComponent({ contest }: { contest: Contest }) {
         getResults(contest.attributes.teamId).then(data => setResults(data));
     }, [contest])
     return (
-        <div className="mt-3 flex justify-center">
+        <div className="mt-3 flex">
             {!results.ladder && (
                 <Spinner />
             )}
             {results.contestName && results.ladder && results.results && (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mx-auto">
                     <div className="text-xl">{results.contestName}</div>
                     <ContestLadder ladder={results.ladder} teamId={contest.attributes.teamId} />
                     <ContestResults results={results.results} teamId={contest.attributes.teamId} />
