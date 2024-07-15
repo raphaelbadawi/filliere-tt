@@ -7,17 +7,18 @@ import parseMarkdown from "@/utils/parseMarkdown";
 
 export default async function PostSnippet({ index, post }: { index: number, post: Post }) {
     const contentHtml = await parseMarkdown(post.attributes.content);
+    const pictureUrl = post.attributes.picture.data.attributes.formats.large?.url || post.attributes.picture.data.attributes.formats.medium?.url || post.attributes.picture.data.attributes.formats.small?.url;
     return (
         <div key={index} className="mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black cursor-aura-receptor">
             <div className="relative flex items-center justify-between">
-                <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>
+                <span className="text-sm text-gpost.attributes.picture.data.attributes.formats.large.urlray-300"><Date dateString={post.attributes.createdAt}></Date></span>
                 <span className="flex gap-2">
                     {post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="h-max px-2 py-1 font-bold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}
                 </span>
             </div>
             <div className="relative mt-3">
                 <Link href={`/news/${post.attributes.slug}`} className="text-white text-3xl font-bold hover:underline">{post.attributes.title}</Link>
-                {post.attributes.picture.data && <Image width="160" height="160" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${post.attributes.picture.data.attributes.formats.small.url}`} alt="Image" className="object-cover h-40 w-40 mt-2 rounded"></Image>}
+                {post.attributes.picture.data && <Image width="240" height="240" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${pictureUrl}`} alt="Image" className="object-cover mt-2 rounded"></Image>}
                 <div dangerouslySetInnerHTML={{ __html: contentHtml.length > 300 ? contentHtml.substring(0, 300) + "..." : contentHtml }} className="mt-3 min-w-full text-white prose prose-invert"></div>
 
             </div>

@@ -2,7 +2,7 @@ let auraReceptors = document.querySelectorAll(".cursor-aura-receptor");
 let currentReceptor;
 let cursorAura;
 
-const cursorHauraHandler = (e) => {
+const cursorAuraHandler = (e) => {
   if (!currentReceptor || !cursorAura) {
     return;
   }
@@ -32,7 +32,7 @@ const addAuraReceptorListener = (receptor) => {
     cursorAura.classList.add("cursor-aura");
     receptor.prepend(cursorAura);
     currentReceptor = receptor;
-    document.addEventListener("mousemove", cursorHauraHandler);
+    document.addEventListener("mousemove", cursorAuraHandler);
   });
 
   receptor.addEventListener("mouseleave", () => {
@@ -40,7 +40,7 @@ const addAuraReceptorListener = (receptor) => {
       return;
     }
     receptor.classList.remove("hovering");
-    document.removeEventListener("mousemove", cursorHauraHandler);
+    document.removeEventListener("mousemove", cursorAuraHandler);
     currentReceptor = null;
     cursorAura.remove();
     cursorAura = null;

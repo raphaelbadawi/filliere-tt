@@ -6,6 +6,7 @@ import parseMarkdown from "@/utils/parseMarkdown";
 
 export default async function PostFull({post}: {post: Post}) {
     const contentHtml = await parseMarkdown(post.attributes.content);
+    const pictureUrl = post.attributes.picture.data.attributes.formats.large?.url || post.attributes.picture.data.attributes.formats.medium?.url || post.attributes.picture.data.attributes.formats.small?.url;
 
     return (
         <div className="w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black">
@@ -18,7 +19,7 @@ export default async function PostFull({post}: {post: Post}) {
                 <h2 className="text-white text-3xl font-bold">{post.attributes.title}</h2>
                 <span className="text-gray-300">par {post.attributes.createdBy.data.attributes.firstname} {post.attributes.createdBy.data.attributes.lastname}</span>
                 <hr className="mt-3 border-white border-t-4 rounded-full"></hr>
-                {post.attributes.picture.data && <Image width="320" height="320" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${post.attributes.picture.data.attributes.formats.small.url}`} alt="Image" className="object-cover h-80 w-80 mt-2 rounded"></Image>}
+                {post.attributes.picture.data && <Image width="400" height="400" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${pictureUrl}`} alt="Image" className="object-cover mt-2 rounded"></Image>}
                 <div dangerouslySetInnerHTML={{ __html: contentHtml }} className="mt-3 min-w-full text-white prose prose-invert"></div>
             </article>
         </div>
