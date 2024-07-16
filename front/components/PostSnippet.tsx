@@ -7,7 +7,9 @@ import parseMarkdown from "@/utils/parseMarkdown";
 
 export default async function PostSnippet({ index, post }: { index: number, post: Post }) {
     const contentHtml = await parseMarkdown(post.attributes.content);
-    const pictureUrl = post.attributes.picture.data.attributes.formats.large?.url || post.attributes.picture.data.attributes.formats.medium?.url || post.attributes.picture.data.attributes.formats.small?.url;
+    const pictureUrl = post.attributes.picture.data?.attributes?.formats?.large?.url
+        || post.attributes.picture.data?.attributes?.formats?.medium?.url
+        || post.attributes.picture.data?.attributes?.formats?.small?.url;
     return (
         <div key={index} className="mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black cursor-aura-receptor">
             <div className="relative flex items-center justify-between">
