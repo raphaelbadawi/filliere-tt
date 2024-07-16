@@ -45,6 +45,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no $SSH_SERVER << 'EOF'
             cd /var/filliere-tt
             docker compose stop
+            git clean -fd
             git reset --hard
             git pull
             chmod +x /var/filliere-tt/prod/docker_cleanup.sh
