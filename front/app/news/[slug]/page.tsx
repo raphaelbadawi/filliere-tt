@@ -9,14 +9,14 @@ type Props = {
     params: { slug: string };
 };
 
-let postFetchPromise: Promise<Post>;
+let posts: { [slug: string]: Promise<Post> } = {};
 
 async function fetchPost(slug: string): Promise<Post> {
-    if (!postFetchPromise) {
+    if (!posts[slug]) {
         let filters = "&filters[slug][$eq]=" + slug;
-        postFetchPromise = getPosts(1, 1, filters).then(response => response.data[0]);
+        posts[slug] = getPosts(1, 1, filters).then(response => response.data[0]);
     }
-    return postFetchPromise;
+    return posts[slug];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
