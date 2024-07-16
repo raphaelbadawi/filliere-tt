@@ -47,7 +47,7 @@ export default function ContestResults({ results, teamId }: { results: Results, 
                     <div className="flex-1 text-right pr-2">
                         {teamName}
                     </div>
-                    <div className="flex-none text-lg font-extrabold mx-4">
+                    <div className="flex-none text-lg font-bold mx-4">
                         <span>{teamPoints}</span> - <span>{opponentPoints}</span>
                     </div>
                     <div className="flex-1 pl-2">

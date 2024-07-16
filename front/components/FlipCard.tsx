@@ -18,9 +18,9 @@ export default function FlipCard({ title, caption, image, text, width, height }:
             <Face flipped={flipped} reverse={false}>
                 <div className="z-10 w-full face-content">
                     <ImageOverlay reverse={false} image={image} color="bg-darkPrimary" />
-                    <h2 className="relative overflow-hidden text font-bold text-3xl lg:text-5xl text-center text-white p-4">{title}</h2>
+                    <h2 className="relative overflow-hidden text font-semibold text-3xl lg:text-5xl text-center text-white p-4">{title}</h2>
                     <hr className="relative border-white border-t-4" />
-                    <p style={{ textShadow: "black 10px 10px 10px" }} className="relative overflow-hidden font-semibold text-xl lg:text-3xl text-white p-4 whitespace-pre-wrap">{caption}</p>
+                    <p style={{ textShadow: "black 10px 10px 10px" }} className="relative overflow-hidden text-xl lg:text-3xl text-white p-4 whitespace-pre-wrap">{caption}</p>
                 </div>
             </Face>
             <Face flipped={!flipped} reverse={true}><ImageOverlay reverse={true} image={image} color="bg-darkAccent" /><p style={{ textShadow: "black 10px 10px 10px" }} className="relative face-content overflow-hidden text-xl lg:text-3xl text-white p-4 whitespace-pre-wrap">{text}</p></Face>

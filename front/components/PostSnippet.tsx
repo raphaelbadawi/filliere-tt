@@ -13,9 +13,9 @@ export default async function PostSnippet({ index, post }: { index: number, post
     return (
         <div key={index} className="mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black cursor-aura-receptor">
             <div className="relative flex items-center justify-between">
-                <span className="text-sm text-gpost.attributes.picture.data.attributes.formats.large.urlray-300"><Date dateString={post.attributes.createdAt}></Date></span>
+                <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>
                 <span className="flex gap-2">
-                    {post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="h-max px-2 py-1 font-bold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}
+                    {post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="h-max px-2 py-1 font-semibold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}
                 </span>
             </div>
             <div className="relative mt-3">
@@ -28,7 +28,7 @@ export default async function PostSnippet({ index, post }: { index: number, post
             <div className="flex items-center gap-2 text-white">
                 <FaArrowRight />
                 <div className="relative w-full flex items-center isolate">
-                    <Link href={`/news/${post.attributes.slug}`} className="absolute hover:underline cursor-pointer z-10 font-extrabold text-lg">Voir plus</Link>
+                    <Link href={`/news/${post.attributes.slug}`} className="absolute hover:underline cursor-pointer z-10 font-bold text-lg">Voir plus</Link>
                     <span className="absolute opacity-50 animate-ping text-gray-300 cursor-pointer z-0">Voir plus</span>
                 </div>
                 <div className="ml-auto flex items-center gap-1"><FaComment />{post.attributes.comments.data.length}</div>

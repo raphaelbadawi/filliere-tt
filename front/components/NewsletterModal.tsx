@@ -20,8 +20,8 @@ const openNewsletterModal: React.MouseEventHandler<HTMLAnchorElement> = async (e
         cancelButtonText: "Annuler",
         buttonsStyling: false,
         customClass: {
-            confirmButton: "bg-primary text-white font-bold py-2 px-4 rounded outline-none",
-            cancelButton: "bg-accent text-white font-bold py-2 px-4 rounded outline-none",
+            confirmButton: "bg-primary text-white font-semibold py-2 px-4 rounded outline-none",
+            cancelButton: "bg-accent text-white font-semibold py-2 px-4 rounded outline-none",
             actions: "gap-4",
         },
         preConfirm: async (email: string) => {

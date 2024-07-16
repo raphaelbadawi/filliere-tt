@@ -28,31 +28,25 @@ const config: Config = {
         "screen": "100vw",
       },
       animation: {
-        typewriter: "typewriter 2s steps(var(--text-length)) forwards",
-        caret:
-          "typewriter 2s steps(var(--text-length)) forwards, blink 1s steps(var(--text-length)) infinite 2s",
+        "gradient-text": "gradient-text 6s ease infinite",
       },
       keyframes: {
-        typewriter: {
-          to: {
-            left: "calc(100% + 0.05em)",
-          },
-        },
-        blink: {
+        "gradient-text": {
           "0%": {
-            opacity: "0",
+            "background-size": "1000% 1000%",
+            "background-position": "left",
           },
-          "0.1%": {
-            opacity: "1",
+          "20%": {
+            "background-size": "1000% 1000%",
+            "background-position": "center",
           },
-          "50%": {
-            opacity: "1",
-          },
-          "50.1%": {
-            opacity: "0",
+          "80%": {
+            "background-size": "1000% 1000%",
+            "background-position": "center",
           },
           "100%": {
-            opacity: "0",
+            "background-size": "1000% 1000%",
+            "background-position": "left",
           },
         },
       },

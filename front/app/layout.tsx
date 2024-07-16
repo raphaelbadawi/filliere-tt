@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
 import Script from 'next/script';
 import Footer from '@/components/Footer';
 
-const poppins = Poppins({ weight: "400", subsets: ["latin"] });
+const poppins = Poppins({ weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], subsets: ["latin"] });
 
 const navLinks: { href: string, title: string, icon: ReactNode, blank?: boolean }[] = [
   { href: "/news", title: "Actualités du club", icon: <FaNewspaper /> },

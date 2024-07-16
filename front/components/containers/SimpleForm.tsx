@@ -73,7 +73,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="flex flex-wrap gap-2 w-full">
                     <div className="flex flex-col flex-grow max-w-full">
-                        <label className="block text-gray-700 text-sm font-bold" htmlFor="usernameInput">
+                        <label className="block text-gray-700 text-sm font-semibold" htmlFor="usernameInput">
                             Mon nom
                         </label>
                         <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="usernameInput" name="usernameInput" onChange={e => setUsername(e.target.value)} type="text" placeholder="Mon nom"></input>
@@ -82,7 +82,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                         )}
                     </div>
                     <div className="flex flex-col flex-grow max-w-full">
-                        <label className="block text-gray-700 text-sm font-bold" htmlFor="emailInput">
+                        <label className="block text-gray-700 text-sm font-semibold" htmlFor="emailInput">
                             Mon email
                         </label>
                         <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="emailInput" name="emailInput" onChange={e => setEmail(e.target.value)} type="email" placeholder="Mon email"></input>
@@ -92,7 +92,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                     </div>
                 </div>
                 <div className="mt-6 flex flex-col w-full">
-                    <label className="block text-gray-700 text-sm font-bold" htmlFor="contentInput">
+                    <label className="block text-gray-700 text-sm font-semibold" htmlFor="contentInput">
                         {textAreaPlaceholder}
                     </label>
                     <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="contentInput" name="contentInput" onChange={e => setContent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
@@ -101,7 +101,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                     )}
                 </div>
                 <div className="mt-6 flex flex-col items-center gap-2">
-                    <button className="bg-primary text-white font-bold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300" onClick={clickHandler} type="button" id="contentButton">
+                    <button className="bg-primary text-white font-semibold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300" onClick={clickHandler} type="button" id="contentButton">
                         {spinner && (
                             <Spinner height="1rem" width="1rem" thickness="2px" addedClasses="mr-2" />
                         )}

@@ -6,14 +6,16 @@ import parseMarkdown from "@/utils/parseMarkdown";
 
 export default async function PostFull({post}: {post: Post}) {
     const contentHtml = await parseMarkdown(post.attributes.content);
-    const pictureUrl = post.attributes.picture.data.attributes.formats.large?.url || post.attributes.picture.data.attributes.formats.medium?.url || post.attributes.picture.data.attributes.formats.small?.url;
+    const pictureUrl = post.attributes.picture.data?.attributes?.formats?.large?.url
+        || post.attributes.picture.data?.attributes?.formats?.medium?.url
+        || post.attributes.picture.data?.attributes?.formats?.small?.url;
 
     return (
         <div className="w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black">
             <Link rel="noopener noreferrer" href="/news" className="mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>
             <div className="mt-3 flex items-center justify-between">
                 <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>
-                <span className="flex gap-2">{post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="h-max px-2 py-1 font-bold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}</span>
+                <span className="flex gap-2">{post.attributes.tags && post.attributes.tags.data.map((tag, index) => <Link key={index} href={`/news?tagId=${tag.id}&tagName=${tag.attributes.tag}`} className="h-max px-2 py-1 font-semibold rounded bg-accent text-white">{tag.attributes.tag.toUpperCase()}</Link>)}</span>
             </div>
             <article className="mt-3">
                 <h2 className="text-white text-3xl font-bold">{post.attributes.title}</h2>
