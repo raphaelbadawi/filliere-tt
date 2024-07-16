@@ -5,6 +5,11 @@ import PostSnippet from "@/components/PostSnippet";
 import Link from "next/link";
 import Title from "@/components/Title";
 import getTag from "@/services/getTag";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Fillière TT | Actualités du club",
+};
 
 export default async function News({ searchParams }: { searchParams: SearchParams }) {
     const pageSize = 10;

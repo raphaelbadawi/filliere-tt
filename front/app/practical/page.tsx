@@ -2,6 +2,11 @@
 import getSingle from "@/services/getSingle";
 import SimpleHtmlContainer from '@/components/containers/SimpleHtmlContainer';
 import parseMarkdown from "@/utils/parseMarkdown";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Fillière TT | Informations pratiques",
+};
 
 export default async function Practical() {
     const { data: practicalObject } = await getSingle("practical");

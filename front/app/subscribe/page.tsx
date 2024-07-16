@@ -2,6 +2,11 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import getSingle from "@/services/getSingle";
 import SimpleHtmlContainer from '@/components/containers/SimpleHtmlContainer';
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Fillière TT | S'inscrire",
+};
 
 export default async function Subscribe() {
     const { data: subscriptionObject } = await getSingle("subscription");
