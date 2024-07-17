@@ -15,6 +15,12 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
         content: z.string().min(10, contentValidationString),
     });
 
+    // We have to explicit the class name otherwise Tailwind will not add it to the bundle
+    let borderColor = "border-primary";
+    if (color == "accent") {
+        borderColor = "border-accent";
+    }
+
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [content, setContent] = useState("");
@@ -67,12 +73,12 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
     };
 
     return (
-        <div className={`flex flex-col gap-3 w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-transparent via-${color} to-transparent`}>
+        <div className={`flex flex-col gap-3 mt-4 mx-auto px-10 py-6 rounded-3xl border-solid border-2 ${borderColor}`}>
             <h2 className="text-3xl">{title}</h2>
             <hr className="border-white border-t-4 rounded-full"></hr>
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div className="flex flex-wrap gap-2 w-full">
-                    <div className="flex flex-col flex-grow max-w-full">
+            <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+                <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-col">
                         <label className="block text-gray-700 text-sm font-semibold" htmlFor="usernameInput">
                             Mon nom
                         </label>
@@ -81,7 +87,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                             <p className="text-red-500">{errors.fieldErrors["username"]}</p>
                         )}
                     </div>
-                    <div className="flex flex-col flex-grow max-w-full">
+                    <div className="flex flex-col">
                         <label className="block text-gray-700 text-sm font-semibold" htmlFor="emailInput">
                             Mon email
                         </label>
@@ -91,7 +97,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                         )}
                     </div>
                 </div>
-                <div className="mt-6 flex flex-col w-full">
+                <div className="mt-6 flex flex-col">
                     <label className="block text-gray-700 text-sm font-semibold" htmlFor="contentInput">
                         {textAreaPlaceholder}
                     </label>
@@ -101,7 +107,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                     )}
                 </div>
                 <div className="mt-6 flex flex-col items-center gap-2">
-                    <button className="bg-primary text-white font-semibold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300" onClick={clickHandler} type="button" id="contentButton">
+                    <button className={`bg-${color} text-white font-semibold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300`} onClick={clickHandler} type="button" id="contentButton">
                         {spinner && (
                             <Spinner height="1rem" width="1rem" thickness="2px" addedClasses="mr-2" />
                         )}

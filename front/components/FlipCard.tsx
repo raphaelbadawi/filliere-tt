@@ -14,7 +14,7 @@ export default function FlipCard({ title, caption, image, text, width, height }:
     };
 
     return (
-        <div className="flip-card relative flex-grow transition-all max-w-screen lg:max-w-1/2" data-original-height={height} style={{width: width, height: height }} onClick={toggleFlip}>
+        <div className="flip-card relative flex-grow transition-all max-w-full lg:max-w-1/2" data-original-height={height} style={{width: width, height: height }} onClick={toggleFlip}>
             <Face flipped={flipped} reverse={false}>
                 <div className="z-10 w-full face-content">
                     <ImageOverlay reverse={false} image={image} color="bg-darkPrimary" />

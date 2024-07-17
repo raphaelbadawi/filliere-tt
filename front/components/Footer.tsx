@@ -3,7 +3,7 @@ import NewsletterModal from './NewsletterModal';
 
 export default function Footer() {
     return (
-        <footer className="w-full mt-4 relative">
+        <footer className="w-full mt-4 fixed bottom-0">
             <div className="relative py-4 text-center bg-background z-10">
                 <NewsletterModal />
                 <address className="text-foreground not-italic">{process.env.NEXT_PUBLIC_ADDRESS}</address>

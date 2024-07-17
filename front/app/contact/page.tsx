@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
     return (
-        <section id="contact" className="w-screen">
+        <section id="contact" className="w-full">
             <ContactComponent />
         </section>
     )

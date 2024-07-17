@@ -20,7 +20,7 @@ export default async function PostSnippet({ index, post }: { index: number, post
             </div>
             <div className="relative mt-3">
                 <Link href={`/news/${post.attributes.slug}`} className="text-white text-3xl font-bold hover:underline">{post.attributes.title}</Link>
-                {post.attributes.picture.data && <Image width="240" height="240" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${pictureUrl}`} alt="Image" className="object-cover mt-2 rounded"></Image>}
+                {post.attributes.picture.data && <Image width="300" height="300" src={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${pictureUrl}`} alt="Image" className="object-cover mt-2 rounded"></Image>}
                 <div dangerouslySetInnerHTML={{ __html: contentHtml }} className="max-h-40 overflow-hidden mt-3 min-w-full text-white prose prose-invert"></div>
 
             </div>

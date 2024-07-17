@@ -31,7 +31,7 @@ export default async function SingleNews({ params }: Props) {
     const fullPost = await fetchPost(params.slug);
 
     return (
-        <div className="w-screen flex flex-col">
+        <div className="w-full flex flex-col">
             <section id="singleNews" className="w-full p-4">
                 <PostFull post={fullPost} />
             </section>

@@ -10,5 +10,5 @@ export default function CommentForm({ post }: { post: Post }) {
         const res = await postComment({ author, email, content, post: post.id });
         return res;
     }
-    return <SimpleForm submitHandler={submitHandler} title="Poster un nouveau commentaire" contentValidationString="Votre commentaire doit faire au moins 10 caractères" textAreaPlaceholder="Votre commentaire" submitNotice="Le commentaire ne sera visible qu'après validation par un modérateur" successNotice="Votre commentaire a été proposé avec succès, il sera validé prochainement" />
+    return <SimpleForm submitHandler={submitHandler} color="accent" title="Poster un nouveau commentaire" contentValidationString="Votre commentaire doit faire au moins 10 caractères" textAreaPlaceholder="Votre commentaire" submitNotice="Le commentaire ne sera visible qu'après validation par un modérateur" successNotice="Votre commentaire a été proposé avec succès, il sera validé prochainement" />
 }

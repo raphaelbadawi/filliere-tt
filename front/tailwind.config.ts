@@ -21,6 +21,12 @@ const config: Config = {
       boxShadow: {
         'reverse': '0 -10px 15px 3px rgba(var(--accent-rgb), 0.3)',
       },
+      spacing: {
+        "42": "10.5rem",
+      },
+      width: {
+        "200": "37.5rem",
+      },
       maxWidth: {
         "1/2": "50%",
       },

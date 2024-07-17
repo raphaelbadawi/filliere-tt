@@ -11,7 +11,7 @@ export default async function ContestPage() {
     const { data } : { data: Contest[] } = await getMultiple("contests");
 
     return (
-        <section id="contest" className="min-w-screen px-4">
+        <section id="contest" className="min-w-full px-4">
             <ContestContainer contests={data} />
         </section>
     )
