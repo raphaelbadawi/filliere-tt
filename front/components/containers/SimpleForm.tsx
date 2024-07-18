@@ -73,12 +73,12 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
     };
 
     return (
-        <div className={`flex flex-col gap-3 mt-4 mx-auto px-10 py-6 rounded-3xl border-solid border-2 ${borderColor}`}>
+        <div className={`flex flex-col gap-2 mx-auto p-3 sm:p-4 rounded-3xl border-solid border-2 ${borderColor}`}>
             <h2 className="text-3xl">{title}</h2>
-            <hr className="border-white border-t-4 rounded-full"></hr>
-            <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+            <hr className="my-2 border-white border-t-4 rounded-full"></hr>
+            <form className="bg-white shadow-md rounded-lg mb-4 p-2 sm:p-4">
                 <div className="flex flex-wrap gap-2">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col grow">
                         <label className="block text-gray-700 text-sm font-semibold" htmlFor="usernameInput">
                             Mon nom
                         </label>
@@ -87,7 +87,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                             <p className="text-red-500">{errors.fieldErrors["username"]}</p>
                         )}
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col grow">
                         <label className="block text-gray-700 text-sm font-semibold" htmlFor="emailInput">
                             Mon email
                         </label>

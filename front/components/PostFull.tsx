@@ -11,7 +11,7 @@ export default async function PostFull({post}: {post: Post}) {
         || post.attributes.picture.data?.attributes?.formats?.small?.url;
 
     return (
-        <div className="w-full mt-4 mx-auto px-10 py-6 rounded bg-gradient-to-r from-primary to-black">
+        <div className="w-full mx-auto p-4 rounded bg-gradient-to-r from-primary to-black">
             <Link rel="noopener noreferrer" href="/news" className="mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>
             <div className="mt-3 flex items-center justify-between">
                 <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>

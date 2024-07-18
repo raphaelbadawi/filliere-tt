@@ -7,6 +7,6 @@ export default function SimpleHtmlContainer({ color = "primary", contentHtml = "
     }
 
     return <div dangerouslySetInnerHTML={{ __html: contentHtml }} className={
-        `prose dark:prose-invert prose-xl flex flex-col gap-3 w-full mx-auto px-10 mb-4 rounded-3xl border-solid border-2 ${borderColor}`}>
+        `prose dark:prose-invert prose-xl flex flex-col gap-2 w-full mx-auto p-4 my-4 rounded-3xl border-solid border-2 ${borderColor}`}>
     </div>
 }
