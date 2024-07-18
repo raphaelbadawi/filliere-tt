@@ -1,5 +1,13 @@
 #!/bin/bash
 
+LOGFILE="/var/filliere-tt/prod/logs/prod.log"
+
+log_message() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> $LOGFILE
+}
+
+log_message "Starting check_disk_space.sh..."
+
 # Disk space threshold (10%)
 THRESHOLD=10
 

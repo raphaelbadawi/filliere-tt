@@ -1,5 +1,13 @@
 #!/bin/bash
 
+LOGFILE="/var/filliere-tt/prod/logs/prod.log"
+
+log_message() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> $LOGFILE
+}
+
+log_message "Starting check_services.sh..."
+
 # Twilio credentials
 ACCOUNT_SID=
 AUTH_TOKEN=
@@ -18,16 +26,16 @@ send_sms() {
 
 # Check if localhost:3000 is responding
 if curl --output /dev/null --silent --head --fail http://localhost:3000; then
-    echo "localhost:3000 is up."
+    log_message "localhost:3000 is up."
 else
-    echo "localhost:3000 is not responding, sending SMS alert."
+    log_message "localhost:3000 is not responding, sending SMS alert." >> $LOGFILE
     send_sms "Warning: localhost:3000 is not responding."
 fi
 
 # Check if localhost:1337 is responding
 if curl --output /dev/null --silent --head --fail http://localhost:1337; then
-    echo "localhost:1337 is up."
+    log_message "localhost:1337 is up."
 else
-    echo "localhost:1337 is not responding, sending SMS alert."
+    log_message "localhost:1337 is not responding, sending SMS alert."
     send_sms "Warning: localhost:1337 is not responding."
 fi

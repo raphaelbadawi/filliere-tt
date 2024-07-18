@@ -1,0 +1,18 @@
+# Add the scripts to /etc/crontab
+# Scripts should run once a day for cleanup scripts, once every 5mn for monitoring scripts
+# They should run as your SSH user, not as root
+# Then put this file under /etc/logrotate.d/
+# Replace "ubuntu ubuntu" by your SSH user and group
+/var/filliere-tt/prod/logs/*.log {
+    daily
+    rotate 7
+    compress
+    missingok
+    notifempty
+    create 0640 ubuntu ubuntu
+    postrotate
+        /usr/bin/killall -HUP docker_cleanup > /dev/null 2>&1 || true
+        /usr/bin/killall -HUP check_services > /dev/null 2>&1 || true
+        /usr/bin/killall -HUP check_disk_space > /dev/null 2>&1 || true
+    endscript
+}
