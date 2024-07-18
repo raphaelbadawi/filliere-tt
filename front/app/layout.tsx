@@ -33,9 +33,9 @@ export default function RootLayout({
 }) {
   return (
     <html className="opacity-0 transition-opacity" lang="en">
-      <body className={`min-h-screen min-w-fit flex bg-background ${poppins.className}`}>
+      <body className={`min-h-screen min-w-fit flex flex-col bg-background ${poppins.className}`}>
         <TopBar links={navLinks} />
-        <main className="mt-20 mb-42 grow grid place-items-start">{children}</main>
+        <main className="mt-20 min-w-fit flex grow">{children}</main>
         <Footer />
         <Script src="/scripts/cursorAura.js" strategy="lazyOnload"></Script>
       </body>
