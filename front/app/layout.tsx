@@ -1,7 +1,7 @@
 import './globals.css'
 import { Poppins } from "next/font/google"
 import { FaNewspaper, FaLightbulb, FaRightToBracket, FaEnvelope, FaTrophy, FaArchway } from "react-icons/fa6";
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import TopBar from '@/components/TopBar';
 import { ReactNode } from 'react';
 import Script from 'next/script';
@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icon.png',
   },
+} 
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
