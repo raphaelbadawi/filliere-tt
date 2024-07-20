@@ -6,6 +6,7 @@ import TopBar from '@/components/TopBar';
 import { ReactNode } from 'react';
 import Script from 'next/script';
 import Footer from '@/components/Footer';
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const poppins = Poppins({ weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Footer />
         <Script src="/scripts/cursorAura.js" strategy="lazyOnload"></Script>
       </body>
+      <GoogleAnalytics gaId={process.env.ANALYTICS_GID || ""} />
     </html>
   )
 }
