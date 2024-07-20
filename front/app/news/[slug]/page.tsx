@@ -31,14 +31,14 @@ export default async function SingleNews({ params }: Props) {
     const fullPost = await fetchPost(params.slug);
 
     return (
-        <div className="w-full flex flex-col">
-            <section id="singleNews" className="w-full p-4">
+        <div className="w-full flex flex-col gap-4 ">
+            <section id="singleNews" className="w-full">
                 <PostFull post={fullPost} />
             </section>
-            <section id="comments" className="w-full p-4">
+            <section id="comments" className="w-full">
                 <Comments post={fullPost}/>
             </section>
-            <section id="commentForm" className="w-full p-4">
+            <section id="commentForm" className="w-full">
                 <CommentForm post={fullPost} />
             </section>
         </div>

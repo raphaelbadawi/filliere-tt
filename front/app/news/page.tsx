@@ -27,7 +27,7 @@ export default async function News({ searchParams }: { searchParams: SearchParam
     const totalPageCount = Math.ceil(totalPosts / pageSize);
 
     return (
-        <section id="news" className="w-full px-4">
+        <section id="news" className="w-full sm:px-4">
             {tagId && <Link rel="noopener noreferrer" href="/news" className="block mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>}
             {tagId && <Title text={tagName.toUpperCase()}></Title>}
             {data && data.map((post: Post, index: number) =>

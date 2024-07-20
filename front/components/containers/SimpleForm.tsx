@@ -73,7 +73,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
     };
 
     return (
-        <div className={`flex flex-col gap-2 mx-auto p-3 sm:p-4 rounded-3xl border-solid border-2 ${borderColor}`}>
+        <div className={`flex flex-col gap-2 mx-auto p-2 sm:p-4 rounded-3xl border-solid border-2 ${borderColor}`}>
             <h2 className="text-3xl">{title}</h2>
             <hr className="my-2 border-white border-t-4 rounded-full"></hr>
             <form className="bg-white shadow-md rounded-lg mb-4 p-2 sm:p-4">
