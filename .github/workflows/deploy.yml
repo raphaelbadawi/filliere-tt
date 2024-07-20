@@ -49,6 +49,8 @@ jobs:
             git reset --hard
             git pull
             chmod +x /var/filliere-tt/prod/docker_cleanup.sh
+            chmod +x /var/filliere-tt/prod/check_disk_space.sh
+            chmod +x /var/filliere-tt/prod/check_services.sh
             ls
             docker rm filliere-tt-filliere-tt-1 filliere-tt-filliere-tt-strapi-1 
             docker rmi filliere-tt-filliere-tt filliere-tt-filliere-tt-strapi
