@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default async function Practical() {
     const { data: practicalObject } = await getSingle("practical");
-    const contentHtml = await parseMarkdown(practicalObject.attributes.content);
+    let contentHtml = await parseMarkdown(practicalObject.attributes.content);
+    contentHtml += `<iframe src=${process.env.NEXT_PUBLIC_MAPS_SRC} width="600" height="450" class="max-w-full border-0 mx-auto" allowFullScreen loading="lazy"></iframe>`;
     return (
         <section id="practical" className="w-full">
             <SimpleHtmlContainer contentHtml={contentHtml} />
-            <iframe src={process.env.NEXT_PUBLIC_MAPS_SRC} width="600" height="450" className="max-w-full border-0 mx-auto" allowFullScreen loading="lazy"></iframe>
         </section>
 
     )

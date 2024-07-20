@@ -6,8 +6,8 @@ export default async function LatestPosts() {
     const { data } = await getPosts(1, 10, "", true);
 
     return (
-        <div className="mt-4 mx-auto p-4 sm:p-6 rounded-lg bg-gradient-to-br from-black via-black to-accent">
-            <h2 className="text-white text-2xl font-semibold">Dernières actus</h2>
+        <div className="mt-4 mx-auto p-4 sm:p-6 text-white rounded-lg bg-gradient-to-br from-black via-black to-accent">
+            <h2 className="text-2xl font-semibold">Dernières actus</h2>
             <hr className="my-2 relative border-white border-t-2 rounded-full" />
             <ul className={`space-y-2`}>
                 {data && data.map((post: Post, index: number) => (
