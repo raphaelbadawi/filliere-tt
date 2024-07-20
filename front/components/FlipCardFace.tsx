@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 
 export default function Face({ children, reverse, flipped }: { children: ReactNode, reverse: boolean, flipped: boolean }) {
     const [overflow, setOverflow] = useState(false);
@@ -88,6 +89,6 @@ export default function Face({ children, reverse, flipped }: { children: ReactNo
             backfaceVisibility: "hidden",
         }}>
         {children}
-        {<a onClick={togglerHandler} ref={togglerRef} className={`${overflow || open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} cursor-pointer z-10 bg-background hover:bg-backlight transition-all text-foreground p-2 rounded absolute bottom-2 left-1/2 -translate-x-1/2`}>{open ? "-" : "+"}</a>}
+        {<a onClick={togglerHandler} ref={togglerRef} className={`${overflow || open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} cursor-pointer z-10 bg-background hover:bg-backlight transition-all text-foreground p-2 rounded absolute bottom-2 left-1/2 -translate-x-1/2`}>{open ? <FaMinus /> : <FaPlus />}</a>}
     </div>);
 }

@@ -21,10 +21,7 @@ const navLinks: { href: string, title: string, icon: ReactNode, blank?: boolean 
 export const metadata: Metadata = {
   title: 'Fillière TT',
   description: 'Site du club de tennis de table de Groisy',
-  icons: {
-    icon: '/icon.png',
-  },
-} 
+}
 
 export const viewport: Viewport = {
   width: 'device-width',
