@@ -11,7 +11,7 @@ export default async function PostSnippet({ index, post }: { index: number, post
         || post.attributes.picture.data?.attributes?.formats?.medium?.url
         || post.attributes.picture.data?.attributes?.formats?.small?.url;
     return (
-        <div key={index} className="mt-4 mx-auto p-2 sm:p-4 rounded bg-gradient-to-r from-primary to-black cursor-aura-receptor">
+        <div key={index} className="mt-4 mx-auto p-2 sm:p-4 rounded-lg bg-gradient-to-r from-primary to-black cursor-aura-receptor">
             <div className="relative flex items-center justify-between">
                 <span className="text-sm text-gray-300"><Date dateString={post.attributes.createdAt}></Date></span>
                 <span className="flex gap-2">
@@ -24,7 +24,7 @@ export default async function PostSnippet({ index, post }: { index: number, post
                 <div dangerouslySetInnerHTML={{ __html: contentHtml }} className="max-h-40 overflow-hidden mt-3 min-w-full text-white prose prose-invert"></div>
 
             </div>
-            <hr className="my-2 relative border-white border-t-2 ruonded-full" />
+            <hr className="my-2 relative border-white border-t-2 rounded-full" />
             <div className="flex items-center gap-2 text-white">
                 <FaArrowRight />
                 <div className="relative w-full flex items-center isolate">

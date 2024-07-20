@@ -6,6 +6,7 @@ import Link from "next/link";
 import Title from "@/components/Title";
 import getTag from "@/services/getTag";
 import { Metadata } from "next";
+import LatestPosts from "@/components/LatestPosts";
 
 export const metadata: Metadata = {
     title: "Fillière TT | Actualités du club",
@@ -28,12 +29,19 @@ export default async function News({ searchParams }: { searchParams: SearchParam
 
     return (
         <section id="news" className="w-full sm:px-4">
-            {tagId && <Link rel="noopener noreferrer" href="/news" className="block mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>}
-            {tagId && <Title text={tagName.toUpperCase()}></Title>}
-            {data && data.map((post: Post, index: number) =>
-                <PostSnippet key={index} index={index} post={post} />
-            )}
-            <Paginator endpoint="/news" pageNumber={pageNumber} totalPageCount={totalPageCount} pageSize={pageSize} totalPosts={totalPosts} />
+            <div className="flex flex-col sm:flex-row gap-4">
+                <div className="w-full sm:w-3/4">
+                    {tagId && <Link rel="noopener noreferrer" href="/news" className="block mt-3 hover:underline text-white cursor-pointer">Retour aux actualités</Link>}
+                    {tagId && <Title text={tagName.toUpperCase()}></Title>}
+                    {data && data.map((post: Post, index: number) =>
+                        <PostSnippet key={index} index={index} post={post} />
+                    )}
+                    <Paginator endpoint="/news" pageNumber={pageNumber} totalPageCount={totalPageCount} pageSize={pageSize} totalPosts={totalPosts} />
+                </div>
+                <div className="w-full sm:w-1/4">
+                    <LatestPosts />
+                </div>
+            </div>
         </section>
     )
 }
