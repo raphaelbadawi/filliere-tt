@@ -8,34 +8,20 @@ log_message() {
 
 log_message "Starting check_services.sh..."
 
-# Twilio credentials
-ACCOUNT_SID=
-AUTH_TOKEN=
-TWILIO_NUMBER=
-TO_NUMBER=
-
-# Function to send SMS
-send_sms() {
-    local message=$1
-    curl -X POST "https://api.twilio.com/2010-04-01/Accounts/$ACCOUNT_SID/Messages.json" \
-    --data-urlencode "Body=$message" \
-    --data-urlencode "From=$TWILIO_NUMBER" \
-    --data-urlencode "To=$TO_NUMBER" \
-    -u $ACCOUNT_SID:$AUTH_TOKEN
-}
+SUBJECT="[FILLIÈRE TT] Service not responding"
 
 # Check if localhost:3000 is responding
 if curl --output /dev/null --silent --head --fail http://localhost:3000; then
     log_message "localhost:3000 is up."
 else
-    log_message "localhost:3000 is not responding, sending SMS alert." >> $LOGFILE
-    send_sms "Warning: localhost:3000 is not responding."
+    log_message "localhost:3000 is not responding, sending email alert." >> $LOGFILE
+    echo -e "From: $MAIL_FROM\nTo: $MAIL_TO\nSubject: $SUBJECT\n\nlocalhost:3000 is not responding" | sendmail -t
 fi
 
 # Check if localhost:1337 is responding
 if curl --output /dev/null --silent --head --fail http://localhost:1337; then
     log_message "localhost:1337 is up."
 else
-    log_message "localhost:1337 is not responding, sending SMS alert."
-    send_sms "Warning: localhost:1337 is not responding."
+    log_message "localhost:1337 is not responding, sending email alert."
+    echo -e "From: $MAIL_FROM\nTo: $MAIL_TO\nSubject: $SUBJECT\n\nlocalhost:1337 is not responding" | sendmail -t
 fi
