@@ -23,7 +23,7 @@ if [ $PERCENTAGE -le $THRESHOLD ]; then
     MESSAGE="Warning: Disk space is below $THRESHOLD%. Available: $PERCENTAGE%."
     log_message $MESSAGE
     # Send email
-    echo -e "From: $MAIL_FROM\nTo: $MAIL_TO\nSubject: $SUBJECT\n\n$MESSAGE" | sendmail -t
+    echo -e "From: $MAIL_FROM\nTo: $MAIL_TO\nSubject: $SUBJECT\n\n$MESSAGE" | msmtp -t
 else
     log_message "Available: $PERCENTAGE%."
 fi

@@ -1,4 +1,4 @@
-# Make sure you installed, configured and enabled sendmail
+# Make sure you installed and configured msmtp
 # Add the scripts to /etc/crontab: for check services you should put it like `MAIL_FROM=name@domain.com MAIL_TO=name@domain.com /path/to/script.sh`
 # Scripts should run once a day for cleanup scripts, once every 5mn for check scripts
 # They should run as your SSH user, not as root

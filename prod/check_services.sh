@@ -15,7 +15,7 @@ if curl --output /dev/null --silent --head --fail http://localhost:3000; then
     log_message "localhost:3000 is up."
 else
     log_message "localhost:3000 is not responding, sending email alert." >> $LOGFILE
-    echo -e "From: $MAIL_FROM\nTo: $MAIL_TO\nSubject: $SUBJECT\n\nlocalhost:3000 is not responding" | sendmail -t
+    echo -e "From: $MAIL_FROM\nTo: $MAIL_TO\nSubject: $SUBJECT\n\nlocalhost:3000 is not responding" | msmtp -t
 fi
 
 # Check if localhost:1337 is responding
