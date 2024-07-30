@@ -55,8 +55,7 @@ Finally, authorize the domain name to your Google ReCAPTCHA key.
 
 ### Backup DB volume
 
-`docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/
-data/ -v $(pwd):/backup postgres:12.0-alpine tar -czvf /backup/backup.tar.gz /var/lib/postgresql/data`
+`docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:12.0-alpine tar -czvf /backup/backup.tar.gz /var/lib/postgresql/data`
 
 You may also backup the ./back/public/uploads folder.
 
@@ -75,6 +74,12 @@ to /etc/crontab to remove all Docker leftover unused data (which can build up ve
 ## Update
 
 Updating packages is as simple as modifying the package.json files with the target versions and running `npm install` locally to update the package-lock.json files. It's more complicated to rehydrate this Docker-side since you have to remove the containers and the images (not the volumes) and then rebuild the images (see ./.github/workflows/deploy.yml).
+
+### PostgreSQL
+
+Stop running services: `docker compose stop`. Then run previous version of PostgreSQL: `docker run -d --name backup-db --platform linux/amd64 --env-file ./back/.env.development.local -v filliere-tt_strapi-data:/var/lib/postgresql/data postgres:12.0-alpine`. Dump the database: `docker exec -it backup-db /usr/local/bin/pg_dumpall -U postgres > dumpfile`. Remove the backup container: `docker stop backup-db && docker rm backup-db`. Remove all "CREATE ROLE "and "ALTER ROLE" lines from the dumpfile. If your PostgreSQL password contains any exclamation mark character, you may change your password now (exclamation marks will cause authentication issues).
+
+You can now run a restore container. First remove the target volume if it already exists: `docker volume rm filliere-tt_strapi-data-pg16` then you can `docker run -d --name restore-db --platform linux/amd64 --env-file ./back/.env.development.local -v filliere-tt_strapi-data-pg16:/var/lib/postgresql/data postgres:16-alpine`. And do the actual restore: `cat dumpfile | docker exec -i restore-db psql -U postgres -d filliere-tt-back`. Adapt the commands to use the POSTGRES_USER set in the .env file (and the production .env file if you're in production). Finally you can cleanup: `docker stop restore-db && docker rm restore-db` and restart the services.
 
 ### Update without downtime
 
