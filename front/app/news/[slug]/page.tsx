@@ -9,19 +9,13 @@ type Props = {
     params: { slug: string };
 };
 
-let posts: { [slug: string]: Promise<Post> } = {};
-
 async function fetchPost(slug: string): Promise<Post> {
-    if (!posts[slug]) {
-        let filters = "&filters[slug][$eq]=" + slug;
-        posts[slug] = getPosts(1, 1, filters).then(response => response.data[0]);
-    }
-    return posts[slug];
+    let filters = "&filters[slug][$eq]=" + slug;
+    return getPosts(1, 1, filters).then(response => response.data[0]);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const fullPost = await fetchPost(params.slug);
-  
     return {
         title: `Fillière TT | ${fullPost.attributes.title}`,
     };
