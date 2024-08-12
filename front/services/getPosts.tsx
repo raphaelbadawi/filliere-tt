@@ -14,7 +14,7 @@ export default async function getPosts(pageNumber: number, pageSize: number, fil
   const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
   const res = await fetch(
     `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/posts${append}&sort=createdAt:desc&populate=*`,
-    { headers: { Authorization: bearer }, cache: "no-store" }
+    { headers: { Authorization: bearer }, next: { revalidate: 60 }}
   );
 
   if (!res.ok) {
