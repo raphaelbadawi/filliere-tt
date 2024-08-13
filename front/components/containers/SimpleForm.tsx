@@ -8,7 +8,7 @@ import { z } from "zod"
 import Spinner from "@/components/Spinner";
 import { verifyCaptcha } from "@/services/verifyCaptcha";
 
-export default function SimpleForm({ submitHandler, title, color = "primary", contentValidationString, textAreaPlaceholder, submitNotice, successNotice }: { submitHandler: Function, title: string, color?: string, contentValidationString: string, textAreaPlaceholder: string, submitNotice: string, successNotice: string }) {
+export default function SimpleForm({ submitHandler, title, color = "primary", secondaryColor = "accent", contentValidationString, textAreaPlaceholder, submitNotice, successNotice }: { submitHandler: Function, title: string, color?: string, secondaryColor?: string, contentValidationString: string, textAreaPlaceholder: string, submitNotice: string, successNotice: string }) {
     const contentFormSchema = z.object({
         username: z.string().min(3, "Le nom d'utilisateur doit faire au moins 3 caractères"),
         email: z.string().email("Vous devez saisir une adresse email valide"),
@@ -109,7 +109,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                 <div className="mt-6 flex flex-col items-center gap-2">
                     <button className={`bg-${color} text-white font-semibold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300`} onClick={clickHandler} type="button" id="contentButton">
                         {spinner && (
-                            <Spinner height="1rem" width="1rem" thickness="2px" addedClasses="mr-2" />
+                            <Spinner height="1rem" width="1rem" thickness="2px" addedClasses={`mr-2 text-${secondaryColor}`} />
                         )}
                         Publier
                     </button>
