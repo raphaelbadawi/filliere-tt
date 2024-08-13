@@ -101,7 +101,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                     <label className="block text-gray-700 text-sm font-semibold" htmlFor="contentInput">
                         {textAreaPlaceholder}
                     </label>
-                    <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="contentInput" name="contentInput" onChange={e => setContent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
+                    <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-2 focus:border-primary h-36" id="contentInput" name="contentInput" onChange={e => setContent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
                     {hasErrors && errors?.fieldErrors?.content && (
                         <p className="text-red-500">{errors.fieldErrors["content"]}</p>
                     )}
