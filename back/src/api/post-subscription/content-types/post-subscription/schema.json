@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "post_subscriptions",
+  "info": {
+    "singularName": "post-subscription",
+    "pluralName": "post-subscriptions",
+    "displayName": "Post Subscription"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post.post",
+      "inversedBy": "post_subscriptions"
+    },
+    "email": {
+      "type": "email"
+    },
+    "hash": {
+      "type": "string"
+    }
+  }
+}

@@ -938,11 +938,53 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::comment.comment'
     >;
     tags: Attribute.Relation<'api::post.post', 'manyToMany', 'api::tag.tag'>;
+    post_subscriptions: Attribute.Relation<
+      'api::post.post',
+      'oneToMany',
+      'api::post-subscription.post-subscription'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'>;
+  };
+}
+
+export interface ApiPostSubscriptionPostSubscription
+  extends Schema.CollectionType {
+  collectionName: 'post_subscriptions';
+  info: {
+    singularName: 'post-subscription';
+    pluralName: 'post-subscriptions';
+    displayName: 'Post Subscription';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    post: Attribute.Relation<
+      'api::post-subscription.post-subscription',
+      'manyToOne',
+      'api::post.post'
+    >;
+    email: Attribute.Email;
+    hash: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::post-subscription.post-subscription',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::post-subscription.post-subscription',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -1113,6 +1155,7 @@ declare module '@strapi/types' {
       'api::contest.contest': ApiContestContest;
       'api::newsletter.newsletter': ApiNewsletterNewsletter;
       'api::post.post': ApiPostPost;
+      'api::post-subscription.post-subscription': ApiPostSubscriptionPostSubscription;
       'api::practical.practical': ApiPracticalPractical;
       'api::subscriber.subscriber': ApiSubscriberSubscriber;
       'api::subscription.subscription': ApiSubscriptionSubscription;
