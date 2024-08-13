@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import DarkModeSwitch from "./DarkModeSwitch";
 
 export default function NavBarMobile({ links }: { links: { href: string, title: string, icon: ReactNode, blank?: boolean }[] }) {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
+    const navRef = useRef<HTMLDivElement>(null);
     const burgerStyles = [
         {
             transform: open ? 'rotate(45deg)' : 'rotate(0)',
@@ -24,8 +25,21 @@ export default function NavBarMobile({ links }: { links: { href: string, title: 
         }
     ]
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (navRef.current && !navRef.current.contains(event.target as Node)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [navRef]);
+
     return (
-        <nav className="flex xl:hidden relative left-0 gap-2">
+        <nav className="flex xl:hidden relative left-0 gap-2" ref={navRef}>
             <Link className="z-20 m-2" href="/" onClick={() => setOpen(false)}><Image alt="Accueil" width="56" height="56" src="/icons/logo.png"></Image></Link>
             <button className="z-20 nav-burger rounded-md" onClick={() => setOpen(!open)}>
                 <div className="w-6 h-1 bg-foreground mb-1 transition-all duration-300" style={burgerStyles[0]} />

@@ -38,6 +38,8 @@ export default function Face({ children, reverse, flipped }: { children: ReactNo
         const cardStyle = getComputedStyle(cardElement);
         const cardFontSize = cardStyle.getPropertyValue("font-size");
         originalHeight.current = parseInt(heightAttribute) * parseInt(cardFontSize);
+        let targetHeight = open ? totalHeight.current + togglerOffset.current : originalHeight.current;
+        cardElement.style.minHeight = targetHeight + "px";
         const togglerElement: HTMLElement | null = togglerRef.current;
         if (!togglerElement) {
             return;

@@ -8,7 +8,7 @@ import { z } from "zod"
 import Spinner from "@/components/Spinner";
 import { verifyCaptcha } from "@/services/verifyCaptcha";
 
-export default function SimpleForm({ submitHandler, title, color = "primary", contentValidationString, textAreaPlaceholder, submitNotice, successNotice }: { submitHandler: Function, title: string, color?: string, contentValidationString: string, textAreaPlaceholder: string, submitNotice: string, successNotice: string }) {
+export default function SimpleForm({ submitHandler, title, color = "primary", secondaryColor = "accent", contentValidationString, textAreaPlaceholder, submitNotice, successNotice }: { submitHandler: Function, title: string, color?: string, secondaryColor?: string, contentValidationString: string, textAreaPlaceholder: string, submitNotice: string, successNotice: string }) {
     const contentFormSchema = z.object({
         username: z.string().min(3, "Le nom d'utilisateur doit faire au moins 3 caractères"),
         email: z.string().email("Vous devez saisir une adresse email valide"),
@@ -67,6 +67,10 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                 return;
             }
             toast.success(successNotice, {});
+            // Clear form fields after success
+            setUsername("");
+            setEmail("");
+            setContent("");
         } catch (error) {
             console.error(error);
         }
@@ -82,7 +86,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                         <label className="block text-gray-700 text-sm font-semibold" htmlFor="usernameInput">
                             Mon nom
                         </label>
-                        <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="usernameInput" name="usernameInput" onChange={e => setUsername(e.target.value)} type="text" placeholder="Mon nom"></input>
+                        <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="usernameInput" name="usernameInput" value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Mon nom"></input>
                         {hasErrors && errors?.fieldErrors?.username && (
                             <p className="text-red-500">{errors.fieldErrors["username"]}</p>
                         )}
@@ -91,7 +95,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                         <label className="block text-gray-700 text-sm font-semibold" htmlFor="emailInput">
                             Mon email
                         </label>
-                        <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="emailInput" name="emailInput" onChange={e => setEmail(e.target.value)} type="email" placeholder="Mon email"></input>
+                        <input className="shadow appearance-none border rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="emailInput" name="emailInput" value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="Mon email"></input>
                         {hasErrors && errors?.fieldErrors?.email && (
                             <p className="text-red-500">{errors.fieldErrors["email"]}</p>
                         )}
@@ -101,7 +105,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                     <label className="block text-gray-700 text-sm font-semibold" htmlFor="contentInput">
                         {textAreaPlaceholder}
                     </label>
-                    <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-b-2 focus:border-b-primary" id="contentInput" name="contentInput" onChange={e => setContent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
+                    <textarea className="shadow appearance-none rounded p-2 text-gray-700 leading-tight outline-none focus:border-2 focus:border-primary h-36" id="contentInput" name="contentInput" value={content} onChange={e => setContent(e.target.value)} placeholder={textAreaPlaceholder}></textarea>
                     {hasErrors && errors?.fieldErrors?.content && (
                         <p className="text-red-500">{errors.fieldErrors["content"]}</p>
                     )}
@@ -109,7 +113,7 @@ export default function SimpleForm({ submitHandler, title, color = "primary", co
                 <div className="mt-6 flex flex-col items-center gap-2">
                     <button className={`bg-${color} text-white font-semibold py-2 px-4 rounded outline-none scale-100 hover:shadow-2xl hover:scale-110 transition-all duration-300`} onClick={clickHandler} type="button" id="contentButton">
                         {spinner && (
-                            <Spinner height="1rem" width="1rem" thickness="2px" addedClasses="mr-2" />
+                            <Spinner height="1rem" width="1rem" thickness="2px" addedClasses={`mr-2 text-${secondaryColor}`} />
                         )}
                         Publier
                     </button>
