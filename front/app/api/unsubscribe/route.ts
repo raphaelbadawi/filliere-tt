@@ -6,7 +6,11 @@ export async function GET(req: Request) {
   if (!hash) {
     return new Response("Le lien n'est pas valide", { status: 400 });
   }
-  const response = await unsubscribe(hash);
+  let entityType = searchParams.get("entityType");
+  if (!entityType) {
+    entityType = "subscribers";
+  }
+  const response = await unsubscribe(hash, entityType);
   if (response !== "OK") {
     return new Response(response, { status: 500 });
   }
