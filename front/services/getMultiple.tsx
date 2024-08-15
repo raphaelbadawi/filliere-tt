@@ -1,5 +1,5 @@
 export default async function getMultiple(type: string = "cards", filters?: string) {
-    let append = "";
+    let append = "&pagination[limit]=10000";
     if (typeof filters != "undefined" && filters.length > 0) {
         append += filters;
     }
