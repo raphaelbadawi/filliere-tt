@@ -22,8 +22,6 @@ services:
     image: postgres:16-alpine
     volumes:
       - strapi-data-pg16:/var/lib/postgresql/data/ #using a volume
-    ports:
-      - "5432:5432"
 
 volumes:
   strapi-data-pg16:
