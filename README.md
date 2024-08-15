@@ -55,13 +55,13 @@ Finally, authorize the domain name to your Google ReCAPTCHA key.
 
 ### Backup DB volume
 
-`docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:12.0-alpine tar -czvf /backup/backup.tar.gz /var/lib/postgresql/data`
+`docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:16.0-alpine tar -czvf /backup/backup.tar.gz /var/lib/postgresql/data`
 
 You may also backup the ./back/public/uploads folder.
 
 ### Restore DB volume
 
-`docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:12.0-alpine sh -c "rm -rf /var/lib/postgresql/data/* && tar -xzvf /backup/backup.tar.gz -C /var/lib/postgresql/data/"`
+`docker run --rm --mount source=filliere-tt_strapi-data,target=/var/lib/postgresql/data/ -v $(pwd):/backup postgres:16.0-alpine sh -c "rm -rf /var/lib/postgresql/data/* && tar -xzvf /backup/backup.tar.gz -C /var/lib/postgresql/data/"`
 
 #### Cleanup
 
