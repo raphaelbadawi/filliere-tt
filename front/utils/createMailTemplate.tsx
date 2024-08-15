@@ -1,5 +1,4 @@
 import { promises as fs } from 'fs';
-import parseMarkdown from "@/utils/parseMarkdown";
 
 export async function setMailTemplateContent(
   template: string,
@@ -15,12 +14,11 @@ export async function setMailTemplateContent(
     hash +
     "&entityType=" +
     entityType;
-  const contentHtml = await parseMarkdown(content);
 
   let templateContent = template
     .replace("{{LOGO_LINK}}", logoLink)
     .replace("{{TITLE}}", title)
-    .replace("{{CONTENT}}", contentHtml)
+    .replace("{{CONTENT}}", content)
     .replace("{{UNSUBSCRIBE_LINK}}", unsubscribeLink);
 
   return templateContent;

@@ -3,6 +3,7 @@ import { fr } from "date-fns/locale";
 import getMultiple from "@/services/getMultiple";
 import sendMail from "@/services/sendMail";
 import { getTemplate, setMailTemplateContent } from "@/utils/createMailTemplate";
+import parseMarkdown from "@/utils/parseMarkdown";
 
 export async function POST(req: Request) {
   const subscribers = await getMultiple("subscribers");
@@ -12,10 +13,12 @@ export async function POST(req: Request) {
   }
   const date = format(new Date(), "d LLLL yyyy", { locale: fr });
   const template = await getTemplate("newsletter");
+  const contentBody = await parseMarkdown(body.content);
+
   for (const subscriber of subscribers.data) {
     const title = `[FILLIÈRE TT] Newsletter du ${date}`;
     const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
-    const content = await setMailTemplateContent(template,  subscriber.attributes.hash, title, body.content, "subscribers");
+    const content = await setMailTemplateContent(template,  subscriber.attributes.hash, title, contentBody, "subscribers");
     sendMail(
       sender || "",
       subscriber.attributes.email,

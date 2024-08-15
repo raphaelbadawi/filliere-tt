@@ -31,14 +31,14 @@ export async function POST(req: Request) {
   // Notify other commenters
   const subscriptions = await getMultiple("post-subscriptions", subscriptionPostFilter);
   const template = await getTemplate("newsletter"); // Nothing fancy, we use the same basic template used for newsletters
-  /** @todo put link with anchor to autoscroll to comments and retest */
-  const contentBody = `Un nouveau commentaire a été posté par ${body.comment.author} sur le post ${post.attributes.title} que vous aviez commenté par le passé. Cliquez <a href="" style="text-decoration: none; color: rgb(137, 162, 202);">ici pour voir les commentaires</a>.`;
+  const linkToPost = process.env.NEXT_PUBLIC_HOST + "/news/" + post.attributes.slug + "#comments";
+  const contentBody = `Un nouveau commentaire a été posté par <strong>${body.comment.author}</strong> sur le contenu "${post.attributes.title}" que vous aviez commenté par le passé. Cliquez <a target="_blank" href="${linkToPost}" style="text-decoration: none; color: rgb(137, 162, 202);">ici pour voir les commentaires</a>.`;
   for(const sub of subscriptions.data) {
     const subEmail = sub.attributes.email;
     if (subEmail == commenterEmail) {
       continue;
     }
-    const title = "[FILLIÈRE TT] Nouvelle activité sur un post que vous avez commenté";
+    const title = "[FILLIÈRE TT] Nouvelle activité";
     const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
     const content = await setMailTemplateContent(template, sub.attributes.hash, title, contentBody, "post-subscribers");
     sendMail(
