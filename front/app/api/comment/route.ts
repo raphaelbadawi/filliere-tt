@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     }
     const title = "[FILLIÈRE TT] Nouvelle activité";
     const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
-    const content = await setMailTemplateContent(template, sub.attributes.hash, title, contentBody, "post-subscribers");
+    const content = await setMailTemplateContent(template, sub.attributes.hash, title, contentBody, "post-subscriptions");
     sendMail(
       sender || "",
       subEmail,
