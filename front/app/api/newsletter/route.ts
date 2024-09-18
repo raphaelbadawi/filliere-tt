@@ -25,6 +25,8 @@ export async function POST(req: Request) {
       title,
       content
     );
+    // Wait 1mn to limit the risk of being identified as spam
+    await new Promise((resolve) => setTimeout(resolve, 60000));
   }
   return new Response("OK", { status: 200 });
 }
