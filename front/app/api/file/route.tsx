@@ -1,7 +1,9 @@
 export async function GET(req: Request) {
     const {searchParams} = new URL(req.url);
+    console.log(searchParams);
     const encodedFileAttributes = searchParams.get("file") || "";
     const fileAttributes = JSON.parse(atob(encodedFileAttributes));
+    console.log(fileAttributes);
     const fileUrl = `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${fileAttributes.url}`
     const response = await fetch(fileUrl);
     if (!response.ok) {

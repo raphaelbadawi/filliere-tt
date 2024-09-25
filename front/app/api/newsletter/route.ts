@@ -18,10 +18,10 @@ export async function POST(req: Request) {
   for (const subscriber of subscribers.data) {
     const title = `[FILLIÈRE TT] Newsletter du ${date}`;
     const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
-    const content = await setMailTemplateContent(template,  subscriber.attributes.hash, title, contentBody, "subscribers");
+    const content = await setMailTemplateContent(template,  subscriber.hash, title, contentBody, "subscribers");
     sendMail(
       sender || "",
-      subscriber.attributes.email,
+      subscriber.email,
       title,
       content
     );

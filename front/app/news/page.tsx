@@ -19,9 +19,9 @@ export default async function News({ searchParams }: { searchParams: SearchParam
     let tagName = "";
     let filters = "";
     if (tagId) {
-        const tag: {data: Tag} = await getTag(tagId);
-        tagName = tag.data.attributes.tag;
-        filters = "&filters[tags][id][$eq]=" + tagId;
+        const tag = await getTag(tagId);
+        tagName = tag.data.tag;
+        filters = "&filters[tags][documentId][$eq]=" + tagId;
     }
     const { data, meta } = await getPosts(pageNumber, pageSize, filters);
     const totalPosts = meta.pagination.total;

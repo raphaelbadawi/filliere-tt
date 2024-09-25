@@ -6,30 +6,25 @@ interface CardAttributes {
   updatedAt: string;
   publishedAt: string;
   picture: {
-    data: {
-      attributes: {
-        formats: {
-          large: {
-            url: string;
-          };
-          medium: {
-            url: string;
-          };
-          small: {
-            url: string;
-          };
-          thumbnail: {
-            url: string;
-          };
-        };
+    formats: {
+      large: {
+        url: string;
+      };
+      medium: {
+        url: string;
+      };
+      small: {
+        url: string;
+      };
+      thumbnail: {
+        url: string;
       };
     };
   };
 }
 
-export interface Card {
-  id: number;
-  attributes: CardAttributes;
+export interface Card extends CardAttributes {
+  documentId: string;
 }
 
 export interface CommentPostAttributes {
@@ -49,47 +44,33 @@ export interface TagAttributes {
   tag: string;
 }
 
-export interface Comment {
-  id: number;
-  attributes: CommentAttributes;
+export interface Comment extends CommentAttributes {
+  documentId: string;
 }
 
-export interface Tag {
-  id: number;
-  attributes: TagAttributes;
+export interface Tag extends TagAttributes {
+  documentId: string;
 }
 
 interface PostAttributes extends CardAttributes {
   slug: string;
   createdBy: {
-    data: {
-      id: number;
-      attributes: {
-        firstname: string;
-        lastname: string;
-      };
-    };
+      documentId: string;
+      firstname: string;
+      lastname: string;
   };
-  comments: {
-    data: Comment[];
-  };
-  tags: {
-    data: Tag[];
-  };
+  comments: Comment[];
+  tags: Tag[];
 }
 
-export interface Post extends Card {
-  attributes: PostAttributes;
-}
+export interface Post extends Card, PostAttributes {}
 
 export interface ContestAttributes extends CardAttributes {
   teamName: string;
   teamId: number;
 }
 
-export interface Contest extends Card {
-  attributes: ContestAttributes;
-}
+export interface Contest extends Card, ContestAttributes {}
 
 interface LadderItem {
   node: Node;
@@ -151,9 +132,7 @@ export interface SearchParams {
 }
 
 export interface Subscriber {
-  id: number,
-  attributes: {
-    email: string,
-    hash: string,
-  }
+  documentId: string;
+  email: string;
+  hash: string;
 }

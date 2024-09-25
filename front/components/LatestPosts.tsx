@@ -12,8 +12,8 @@ export default async function LatestPosts() {
             <ul className={`space-y-2`}>
                 {data && data.map((post: Post, index: number) => (
                     <li key={index} className="relative pl-6 group">
-                        <Link className="block transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:translate-x-[5%] group-hover:font-semibold" href={`/news/${post.attributes.slug}`}>
-                            {post.attributes.title}
+                        <Link className="block transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:translate-x-[5%] group-hover:font-semibold" href={`/news/${post.slug}`}>
+                            {post.title}
                         </Link>
                         <span className="absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-1000 ease-in-out group-hover:opacity-0">👉</span>
                     </li>

@@ -17,7 +17,7 @@ async function fetchPost(slug: string): Promise<Post> {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const fullPost = await fetchPost(params.slug);
     return {
-        title: `Fillière TT | ${fullPost.attributes.title}`,
+        title: `Fillière TT | ${fullPost.title}`,
     };
 }
 

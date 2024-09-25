@@ -9,13 +9,13 @@ export async function POST(req: Request) {
   const commentId = body.comment.id;
   const commenterEmail = body.comment.email;
   const subscriptionEmailFilter = "&filters[email][$eq]=" + commenterEmail;
-  const postFilters = "&filters[comments][id][$eq]=" + commentId;
+  const postFilters = "&filters[comments][documentId][$eq]=" + commentId;
   const post = await getPosts(1, 1, postFilters).then(response => response.data[0]);
-  const subscriptionPostFilter = "&filters[post][id][$eq]=" + post.id;
+  const subscriptionPostFilter = "&filters[post][documentId][$eq]=" + post.documentId;
   const commenterSubscription = await getMultiple("post-subscriptions", subscriptionEmailFilter + subscriptionPostFilter);
 
   // Subscribe the commenter if not already subscribed to post
-  if (!commenterSubscription.data.length) {
+  if (!commenterSubscription.length) {
     const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
     const hash = crypto.randomBytes(32).toString("hex");
     const res = await fetch(
@@ -31,16 +31,16 @@ export async function POST(req: Request) {
   // Notify other commenters
   const subscriptions = await getMultiple("post-subscriptions", subscriptionPostFilter);
   const template = await getTemplate("newsletter"); // Nothing fancy, we use the same basic template used for newsletters
-  const linkToPost = process.env.NEXT_PUBLIC_HOST + "/news/" + post.attributes.slug + "#comments";
-  const contentBody = `Un nouveau commentaire a été posté par <strong>${body.comment.author}</strong> sur le contenu "${post.attributes.title}" que vous aviez commenté par le passé. Cliquez <a target="_blank" href="${linkToPost}" style="text-decoration: none; color: rgb(137, 162, 202);">ici pour voir les commentaires</a>.`;
+  const linkToPost = process.env.NEXT_PUBLIC_HOST + "/news/" + post.slug + "#comments";
+  const contentBody = `Un nouveau commentaire a été posté par <strong>${body.comment.author}</strong> sur le contenu "${post.title}" que vous aviez commenté par le passé. Cliquez <a target="_blank" href="${linkToPost}" style="text-decoration: none; color: rgb(137, 162, 202);">ici pour voir les commentaires</a>.`;
   for(const sub of subscriptions.data) {
-    const subEmail = sub.attributes.email;
+    const subEmail = sub.email;
     if (subEmail == commenterEmail) {
       continue;
     }
     const title = "[FILLIÈRE TT] Nouvelle activité";
     const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
-    const content = await setMailTemplateContent(template, sub.attributes.hash, title, contentBody, "post-subscriptions");
+    const content = await setMailTemplateContent(template, sub.hash, title, contentBody, "post-subscriptions");
     sendMail(
       sender || "",
       subEmail,

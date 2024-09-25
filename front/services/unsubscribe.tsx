@@ -15,12 +15,12 @@ export default async function unsubscribe(hash: string, entityType: string = "su
     return "Cette adresse email est déjà désinscrite";
   }
   // If hashes don't match, the request doesn't come from a legit link
-  if (currentEntryData.data[0].attributes.hash != hash) {
+  if (currentEntryData.data[0].hash != hash) {
     return "Le lien n'est pas valide";
   }
 
   const res = await fetch(
-    `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/${entityType}/${currentEntryData.data[0].id}`,
+    `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/${entityType}/${currentEntryData.data[0].documentId}`,
     {
       method: "DELETE",
       headers: { Authorization: bearer, "Content-Type": "application/json" },

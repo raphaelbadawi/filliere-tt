@@ -9,10 +9,10 @@ export default async function Home() {
   const { data: titleObject } = await getSingle();
   return (
     <section id="home" className="w-full">
-      <Title text={titleObject.attributes.title} />
+      <Title text={titleObject.title} />
       <div className="sm:px-4 flex flex-wrap gap-4 items-start">
         {cards && cards.map((card, index) =>
-          <FlipCard key={index} width="20rem" height="32rem" title={card.attributes.title} caption={card.attributes.caption || ""} text={card.attributes.content} image={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${card.attributes.picture.data.attributes.formats.medium?.url || card.attributes.picture.data.attributes.formats.small.url}`}></FlipCard>
+          <FlipCard key={index} width="20rem" height="32rem" title={card.title} caption={card.caption || ""} text={card.content} image={`${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}${card.picture.formats.medium?.url || card.picture.formats.small.url}`}></FlipCard>
         )}
       </div>
     </section>

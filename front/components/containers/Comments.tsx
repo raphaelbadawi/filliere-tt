@@ -2,7 +2,7 @@ import { Post } from "@/types";
 import Comment from "@/components/Comment";
 
 export default function Comments({post}: {post: Post}) {
-    const comments = post.attributes.comments.data;
+    const comments = post.comments;
     return (
         <div className="flex flex-col gap-2 w-full mx-auto p-2 sm:p-4 rounded-lg bg-gradient-to-r from-black to-accent text-white">
             <h2 className="text-3xl">Commentaires</h2>

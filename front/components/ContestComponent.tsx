@@ -10,7 +10,7 @@ export default function ContestComponent({ contest }: { contest: Contest }) {
     // Trigger a getResults request and update state accordingly
     useEffect(() => {
         setResults({ contestName: null, ladder: null, results: null });
-        getResults(contest.attributes.teamId).then(data => setResults(data));
+        getResults(contest.teamId).then(data => setResults(data));
     }, [contest])
     return (
         <div className="mt-3 flex">
@@ -20,8 +20,8 @@ export default function ContestComponent({ contest }: { contest: Contest }) {
             {results.contestName && results.ladder && results.results && (
                 <div className="flex flex-col gap-4 mx-auto">
                     <div className="text-xl">{results.contestName}</div>
-                    <ContestLadder ladder={results.ladder} teamId={contest.attributes.teamId} />
-                    <ContestResults results={results.results} teamId={contest.attributes.teamId} />
+                    <ContestLadder ladder={results.ladder} teamId={contest.teamId} />
+                    <ContestResults results={results.results} teamId={contest.teamId} />
                 </div>
 
             )}

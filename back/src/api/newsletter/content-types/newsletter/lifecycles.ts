@@ -1,5 +1,5 @@
 export default {
-  async afterUpdate(event) {
+  async afterCreate(event) {
     const { result } = event;
     if (!result.publishedAt) {
       return;

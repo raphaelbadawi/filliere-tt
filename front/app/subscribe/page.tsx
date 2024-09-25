@@ -12,9 +12,9 @@ export default async function Subscribe() {
     const { data: subscriptionObject } = await getSingle("subscription");
     const processedContent = await remark()
         .use(html)
-        .process(subscriptionObject.attributes.content || "")
+        .process(subscriptionObject.content || "")
     const contentHtml = processedContent.toString().replaceAll("<a href", "<a target=\"_blank\" href");
-    const fileAttributes = subscriptionObject.attributes.file.data.attributes;
+    const fileAttributes = subscriptionObject.file;
     const encodedFileAttributes = btoa(JSON.stringify(fileAttributes));
     return (
         <section id="practical" className="w-full flex flex-col items-center gap-2">

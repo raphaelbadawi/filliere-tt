@@ -6,7 +6,7 @@ export default async function postComment(commentData: CommentPostAttributes) {
     const bearer = `Bearer ${process.env.STRAPI_TOKEN}`;
     commentData.publishedAt = null;
     const res = await fetch(
-        `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/comments`,
+        `${process.env.STRAPI_DOCKER_NETWORK_ENDPOINT}/api/comments?status=draft`,
         {
             method: "POST",
             headers: { Authorization: bearer, "Content-Type": "application/json" },
