@@ -31,7 +31,7 @@ export interface CommentPostAttributes {
   author: string;
   email: string;
   content: string;
-  post: number;
+  post: string;
   publishedAt?: string | null;
 }
 
