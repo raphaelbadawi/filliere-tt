@@ -22,7 +22,7 @@ export default function Face({ children, reverse, flipped }: { children: ReactNo
         return originalHeight.current < targetElement.scrollHeight;
     };
 
-    const computeFixedHeights = () => {
+    useEffect(() => {
         if (!faceRef.current) {
             return;
         }
@@ -47,11 +47,7 @@ export default function Face({ children, reverse, flipped }: { children: ReactNo
         const togglerStyle = getComputedStyle(togglerElement);
         const togglerFontSize = togglerStyle.getPropertyValue("font-size");
         togglerOffset.current = parseInt(togglerFontSize) * 2;
-    }
-
-    useEffect(() => {
-        computeFixedHeights();
-    }, []);
+    }, [open]);
 
     useEffect(() => {
         if (!faceRef.current) {

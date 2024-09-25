@@ -128,7 +128,7 @@ export type Results = Result[];
 
 export interface SearchParams {
   page?: number;
-  tagId?: number;
+  tagId?: string;
 }
 
 export interface Subscriber {
