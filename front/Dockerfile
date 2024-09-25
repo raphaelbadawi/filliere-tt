@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 RUN mkdir -p /usr/src/app
 ENV PORT 3000
 WORKDIR /usr/src/app
