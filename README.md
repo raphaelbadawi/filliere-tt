@@ -30,7 +30,7 @@ Finally, you will need to generate an API token in Strapi configuration and fill
 
 ### Production
 
-For the web server configuration, take example on the nginx.ping.conf example in the ./prod folder. It is recommended for things to work out of the box (including CI, nginx configuration and cleanup script) to clone the git repo in `/var` so it sits in `/var/filliere-tt`.
+For the web server configuration, take example on the nginx.prod.conf example in the ./prod folder. It is recommended for things to work out of the box (including CI, nginx configuration and cleanup script) to clone the git repo in `/var` so it sits in `/var/filliere-tt`.
 
 Make sure the NEXT_PUBLIC_HOST variable in your production NextJS .env matches your production host.
 
