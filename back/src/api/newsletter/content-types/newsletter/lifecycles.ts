@@ -1,11 +1,11 @@
 export default {
-  async afterCreate(event) {
+  afterCreate(event) {
     const { result } = event;
     if (!result.publishedAt) {
       return;
     }
     // the newsletter was just published or was modified after publication
-    const res = await fetch(
+    fetch(
       `http://${process.env.NEXT_DOCKER_NETWORK_ENDPOINT}/api/newsletter`,
       { 
         method: "POST",
@@ -14,6 +14,6 @@ export default {
           content: result.content,
         })
       }
-  );
+    );
   },
 };
