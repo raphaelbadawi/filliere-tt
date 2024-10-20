@@ -1,11 +1,12 @@
 export default {
-  afterCreate(event) {
+  async afterCreate(event) {
     const { result } = event;
     if (!result.publishedAt) {
       return;
     }
+
     // the comment was just published or was modified after publication
-    fetch(
+    await fetch(
       `http://${process.env.NEXT_DOCKER_NETWORK_ENDPOINT}/api/comment`,
       {
         method: "POST",

@@ -29,27 +29,47 @@ export async function POST(req: Request) {
   }
 
   // Notify other commenters
-  const subscriptions = await getMultiple("post-subscriptions", subscriptionPostFilter);
-  const template = await getTemplate("newsletter"); // Nothing fancy, we use the same basic template used for newsletters
-  const linkToPost = process.env.NEXT_PUBLIC_HOST + "/news/" + post.slug + "#comments";
-  const contentBody = `Un nouveau commentaire a été posté par <strong>${body.comment.author}</strong> sur le contenu "${post.title}" que vous aviez commenté par le passé. Cliquez <a target="_blank" href="${linkToPost}" style="text-decoration: none; color: rgb(137, 162, 202);">ici pour voir les commentaires</a>.`;
-  for(const sub of subscriptions.data) {
-    const subEmail = sub.email;
-    if (subEmail == commenterEmail) {
-      continue;
-    }
-    const title = "[FILLIÈRE TT] Nouvelle activité";
-    const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
-    const content = await setMailTemplateContent(template, sub.hash, title, contentBody, "post-subscriptions");
-    sendMail(
-      sender || "",
-      subEmail,
-      title,
-      content
-    );
-    // Wait 1mn to limit the risk of being identified as spam
-    await new Promise((resolve) => setTimeout(resolve, 60000));
-  }
+  new Promise(async (resolve, reject) => {
+    try {
 
+      const subscriptions = await getMultiple("post-subscriptions", subscriptionPostFilter);
+      const template = await getTemplate("newsletter"); // Nothing fancy, we use the same basic template used for newsletters
+      const linkToPost = process.env.NEXT_PUBLIC_HOST + "/news/" + post.slug + "#comments";
+      const contentBody = `Un nouveau commentaire a été posté par <strong>${body.comment.author}</strong> sur le contenu "${post.title}" que vous aviez commenté par le passé. Cliquez <a target="_blank" href="${linkToPost}" style="text-decoration: none; color: rgb(137, 162, 202);">ici pour voir les commentaires</a>.`;
+
+      let count = 0;
+
+      for(const sub of subscriptions.data) {
+        const subEmail = sub.email;
+        if (subEmail == commenterEmail) {
+          continue;
+        }
+        const title = "[FILLIÈRE TT] Nouvelle activité";
+        const sender = `Fillière TT <${process.env.MAIL_POSTMASTER}>`;
+        const content = await setMailTemplateContent(template, sub.hash, title, contentBody, "post-subscriptions");
+        sendMail(
+          sender || "",
+          subEmail,
+          title,
+          content
+        );
+        // Wait 10 seconds to limit spam detection
+        await new Promise((resolve) => setTimeout(resolve, 10 * 1000));
+
+        count++;
+
+        // After 20 emails, wait for an entire hour before continuing
+        if (count % 20 === 0) {
+          await new Promise((resolve) => setTimeout(resolve, 60 * 60 * 1000));
+        }
+      }
+
+      resolve("Emails sent successfully");
+    } catch (error) {
+      reject(error);
+    }
+  }).catch((error) => console.error("Error in email sending process", error));
+
+  // Return early before the email process is done
   return new Response("OK", { status: 200 });
 }
