@@ -35,7 +35,7 @@ export async function POST(req: Request) {
         sendMail(sender || "", subscriber.email, title, content);
         
         // Wait 10 seconds to limit spam detection
-        await new Promise((resolve) => setTimeout(resolve, 10 * 1000));
+        await new Promise((resolve) => setTimeout(resolve, 60 * 1000));
 
         count++;
 
