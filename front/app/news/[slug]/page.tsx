@@ -6,7 +6,7 @@ import { Post } from "@/types";
 import { Metadata } from "next";
 
 type Props = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
 async function fetchPost(slug: string): Promise<Post> {
@@ -14,14 +14,16 @@ async function fetchPost(slug: string): Promise<Post> {
     return getPosts(1, 1, filters).then(response => response.data[0]);
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+    const params = await props.params;
     const fullPost = await fetchPost(params.slug);
     return {
         title: `Fillière TT | ${fullPost.title}`,
     };
 }
 
-export default async function SingleNews({ params }: Props) {
+export default async function SingleNews(props: Props) {
+    const params = await props.params;
     const fullPost = await fetchPost(params.slug);
 
     return (

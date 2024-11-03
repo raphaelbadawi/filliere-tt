@@ -12,7 +12,8 @@ export const metadata: Metadata = {
     title: "Fillière TT | Actualités du club",
 };
 
-export default async function News({ searchParams }: { searchParams: SearchParams }) {
+export default async function News(props: { searchParams: Promise<SearchParams> }) {
+    const searchParams = await props.searchParams;
     const pageSize = 10;
     const pageNumber = Number(searchParams.page) || 1;
     const tagId = searchParams.tagId || false;
