@@ -1,6 +1,7 @@
 "use client";
 
 import subscribe from '@/services/subscribe';
+import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { z } from "zod"
 
@@ -48,6 +49,6 @@ const openNewsletterModal: React.MouseEventHandler<HTMLAnchorElement> = async (e
 
 export default function NewsletterModal() {
     return (
-        <a onClick={openNewsletterModal} href="/" className="text-primary hover:underline">S&apos;abonner à la newsletter du club</a>
+        <Link onClick={openNewsletterModal} href="/" className="text-primary hover:underline">S&apos;abonner à la newsletter du club</Link>
     );
 };
