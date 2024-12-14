@@ -1,14 +1,4 @@
 services:
-  # # reverse proxy debugging
-  # nginx:
-  #   image: nginx:latest
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./prod/nginx.dev.conf:/etc/nginx/nginx.conf
-  #   depends_on:
-  #     - filliere-tt
-  #     - filliere-tt-strapi
   filliere-tt:
     build:
       context: ./front
