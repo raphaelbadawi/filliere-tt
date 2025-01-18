@@ -25,8 +25,6 @@ export default function ContestResults({ results, teamId }: { results: Results, 
         </>
     );
 
-    const isTeamHome = (game: Result) => game.node.homeOpponent && game.node.homeOpponent.team.id === `/api/teams/${teamId}`;
-
     const renderMatchDetail = (game: Result) => {
         let { awayGamePoints, homeGamePoints, awayOpponent, homeOpponent, date, winner } = game.node;
         if (!homeOpponent) {
@@ -35,11 +33,10 @@ export default function ContestResults({ results, teamId }: { results: Results, 
         if (!awayOpponent) {
             awayOpponent = { id: "0", team: { id: "0", name: "N/A" } };
         }
-        const isHome = isTeamHome(game);
-        const opponentName = isHome ? awayOpponent.team.name : homeOpponent.team.name;
-        const teamName = isHome ? homeOpponent.team.name : awayOpponent.team.name;
-        const teamPoints = isHome ? homeGamePoints : awayGamePoints;
-        const opponentPoints = isHome ? awayGamePoints : homeGamePoints;
+        const opponentName = awayOpponent.team.name;
+        const teamName = homeOpponent.team.name;
+        const teamPoints = homeGamePoints;
+        const opponentPoints = awayGamePoints;
 
         return (
             <div key={game.node.id} className="py-4 border-b last:border-b-0">
